@@ -1,12 +1,23 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hhh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
+        <BotaoComponent
+          icone-esquerda="menu"
+          dense
+          outlined
+          @click="leftDrawerOpen = !leftDrawerOpen"
+        />
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered> </q-drawer>
+    <DrawerComponent
+      v-model="leftDrawerOpen"
+      show-if-above
+      :breakpoint="900"
+      :width="280"
+      :items="sidebar"
+    />
 
     <q-page-container>
       <router-view />
@@ -16,10 +27,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import type { LayoutProps } from './layout-interface';
+import DrawerComponent from 'src/components/drawer/drawer-component.vue';
+
+defineProps<LayoutProps>();
 
 const leftDrawerOpen = ref(false);
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
 </script>

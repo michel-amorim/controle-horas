@@ -1,0 +1,19 @@
+.container-page {
+  background: $color-gray-100;
+  padding: $spacing-3xl;
+
+  .container {
+    max-width: $max-width-container;
+    margin: 0 auto;
+    header {
+      margin-bottom: $spacing-xl;
+      h1 {
+        text-transform: uppercase;
+        color: $primary;
+      }
+      h1 {
+        margin-bottom: $spacing-sm;
+      }
+    }
+  }
+}

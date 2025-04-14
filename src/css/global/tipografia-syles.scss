@@ -1,0 +1,39 @@
+$h1-size: clamp(1rem, 5vw, 2rem);
+$h1-weight: bold;
+
+$h2-size: clamp(1rem, 4vw, 1.5rem);
+$h2-weight: medium;
+
+$h3-size: clamp(1rem, 3vw, 1.25rem);
+$h3-weight: medium;
+
+$p-size: 0.875rem;
+$p-weight: medium;
+
+$small-size: clamp(0.75rem, 1.5vw, 0.75rem);
+$small-weight: medium;
+
+@mixin typography($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+h1 {
+  @include typography($h1-size, $h1-weight);
+}
+
+h2 {
+  @include typography($h2-size, $h2-weight);
+}
+
+h3 {
+  @include typography($h3-size, $h3-weight);
+}
+
+p {
+  @include typography($p-size, $p-weight);
+}
+
+small {
+  @include typography($small-size, $small-weight);
+}

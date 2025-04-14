@@ -1,18 +1,14 @@
-import type { RouteRecordRaw } from 'vue-router';
+import { HomeRouter } from 'src/pages/home/home-router';
+import { Routename } from './router-names';
+import type { PageConfig } from './config/routes-types';
+import { ErrorPublicRouter } from 'src/pages/error/error-publico/error-route';
 
-const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    component: () => import('layouts/main-layout.vue'),
-    children: [{ path: '', component: () => import('pages/index-page.vue') }],
-  },
+import { AuthRouter } from 'src/pages/auth/auth-router';
 
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
-  },
+export const Routes: PageConfig[] = [...AuthRouter, ...HomeRouter, ...ErrorPublicRouter];
+
+export const PublicRoutes: Routename[] = [
+  Routename.PublicError403,
+  Routename.PublicError404,
+  Routename.Auth,
 ];
-
-export default routes;

@@ -1,0 +1,19 @@
+.header-class-tabela {
+  color: $color-gray-100;
+  background-color: $color-primary-700;
+  text-transform: uppercase;
+}
+
+.linha-cor {
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background-color: $color-gray-400;
+      }
+
+      &:nth-child(even) {
+        background-color: $color-gray-100;
+      }
+    }
+  }
+}

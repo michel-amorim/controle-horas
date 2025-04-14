@@ -1,0 +1,11 @@
+.container-header {
+  background-color: $color-white-100;
+  padding-left: $spacing-md;
+
+  .container-img {
+    max-width: 150px;
+    img {
+      width: 100%;
+    }
+  }
+}

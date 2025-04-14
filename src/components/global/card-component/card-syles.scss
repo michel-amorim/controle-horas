@@ -1,0 +1,18 @@
+.container-card {
+  padding: $spacing-lg;
+  border-radius: $spacing-sm;
+
+  h2 {
+    font-size: $font-size-xl;
+    font-weight: bold;
+    color: $primary;
+  }
+
+  .separador {
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.container-botao-retorno {
+  margin-bottom: $spacing-md;
+}
