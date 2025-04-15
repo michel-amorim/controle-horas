@@ -13,6 +13,7 @@ export interface DialogCorpoInterface {
 
 export interface DialogRodapeInterface {
   labelBotaoDireito?: string;
+
   corBotaoDireito?: string;
   labelBotaoEsquerdo?: string;
   corBotaoEsquerdo?: string;

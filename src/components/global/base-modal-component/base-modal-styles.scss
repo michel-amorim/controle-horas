@@ -3,35 +3,17 @@
   min-width: 500px;
 
   .container-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 0;
-    padding-left: 0;
-
-    .content-icon {
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0;
+    h1 {
       font-size: $font-size-lg;
-      margin-right: $font-size-md;
     }
   }
 
   .content-dois-botoes {
     display: flex;
     justify-content: space-between;
-    padding: 0;
-    padding-bottom: 0;
-  }
-
-  .content-botao-esquerdo {
-    display: flex;
-    justify-content: flex-start;
-    padding: 0;
-    padding-bottom: 0;
-  }
-
-  .content-botao-direito {
-    display: flex;
-    justify-content: flex-end;
     padding: 0;
     padding-bottom: 0;
   }

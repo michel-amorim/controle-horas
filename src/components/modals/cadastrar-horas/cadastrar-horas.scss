@@ -1,0 +1,14 @@
+.container-modal {
+  width: 100%;
+  max-width: 700px !important;
+
+  .container-horas {
+    margin-bottom: $spacing-sm;
+
+    .content-botao-horas {
+      display: flex;
+      justify-content: flex-end;
+      margin: $spacing-sm 0;
+    }
+  }
+}

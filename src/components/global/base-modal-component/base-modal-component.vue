@@ -6,9 +6,8 @@
         <q-icon v-if="icone" :color="corCabecalho" :name="icone" class="content-icon" />
         <h1 :class="`text-${corCabecalho}`">{{ titulo }}</h1>
         <q-space />
-        <BotaoComponent dense iconeEsquerda="close" flat v-close-popup />
       </q-card-section>
-
+      <q-separator spaced />
       <!-- skeleton para carregamento -->
       <q-card-section v-if="skeleton" class="q-px-none">
         <q-skeleton
@@ -24,13 +23,13 @@
         <slot></slot>
       </q-card-section>
       <!-- navegacao/rodepe -->
-      <q-card-section v-if="labelBotaoDireito || labelBotaoEsquerdo" :class="botaoClass">
+      <q-card-section :class="botaoClass">
         <BotaoComponent
           v-if="labelBotaoEsquerdo"
           :disable="disableBotaoEsquerdo"
           outline
           :label="labelBotaoEsquerdo"
-          @click="clickEsquerdo"
+          v-close-popup
         />
         <BotaoComponent
           v-if="labelBotaoDireito"
@@ -58,6 +57,8 @@ const props = withDefaults(defineProps<PropsModal>(), {
   skeleton: false,
   quantidadeSkeleton: 5,
   persistent: false,
+  labelBotaoEsquerdo: 'fechar',
+  labelBotaoDireito: 'Cadastrar',
 });
 
 const emit = defineEmits(['clickDireito', 'clickEsquerdo']);

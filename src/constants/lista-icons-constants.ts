@@ -30,6 +30,7 @@ export const MaterialIconsEnum = {
   CloudUpload: 'cloud_upload',
   UploadFile: 'upload_file',
   Delete: 'delete',
+  Add: 'add',
 } as const;
 
 export type MaterialIconKeys = keyof typeof MaterialIconsEnum;

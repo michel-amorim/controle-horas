@@ -1,12 +1,11 @@
 <template>
   <ContainerComponent :visivel="true" titulo="Consultar Horas">
-    <FormComponent>
+    <FormComponent class="q-mb-md">
       <div class="row q-gutter-x-sm">
-        <SelecaoComponent input-class="col" label="select" :opcoes="[]" v-model="formulario" />
-        <InputComponent input-class="col" label="texto" v-model="formulario" />
+        <SelecaoComponent input-class="col" label="Sistemas" :opcoes="[]" v-model="formulario" />
       </div>
       <template #optionalBtn>
-        <BotaoComponent label="Cadastrar hora" />
+        <BotaoComponent label="Cadastrar hora" @click="cadastrarHoras" />
       </template>
     </FormComponent>
     <TabelaComponent :rows="mockControleHorasData" :columns="ControleHorasColunas" />
@@ -18,6 +17,14 @@ import FormComponent from 'src/components/global/form-component/form-component.v
 import TabelaComponent from 'src/components/global/tabela-component/tabela-component.vue';
 import { ref } from 'vue';
 import { ControleHorasColunas, mockControleHorasData } from './controle-horas-colunas';
+import { Dialog } from 'quasar';
+import CadastrarHorasModal from 'src/components/modals/cadastrar-horas/cadastrar-horas-modal.vue';
 
 const formulario = ref();
+
+const cadastrarHoras = () => {
+  Dialog.create({
+    component: CadastrarHorasModal,
+  });
+};
 </script>

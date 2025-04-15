@@ -9,6 +9,8 @@ import type ArquivoComponent from 'src/components/global/inputs-component/arquiv
 import type ContainerComponent from 'src/components/global/container-component/container-component.vue';
 import type BaseModalComponent from 'src/components/global/base-modal-component/base-modal-component.vue';
 import type ColorComponent from 'src/components/global/inputs-component/color/input-color-component.vue';
+import type DataHoraComponent from 'src/components/global/inputs-component/data-hora/input-data-hora-component.vue';
+import type HorasComponent from 'src/components/global/inputs-component/horas/horas-component.vue';
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -17,11 +19,12 @@ declare module '@vue/runtime-core' {
     CardComponent: typeof CardComponent;
     InputComponent: typeof InputComponent;
     SelecaoComponent: typeof SelecaoComponent;
+    HorasComponent: typeof HorasComponent;
     DataComponent: typeof DataComponent;
     ArquivoComponent: typeof ArquivoComponent;
     ContainerComponent: typeof ContainerComponent;
     ColorComponent: typeof ColorComponent;
-
+    DataHoraComponent: typeof DataHoraComponent;
     BaseModalComponent: typeof BaseModalComponent;
     IconComponent: typeof IconComponent;
   }
