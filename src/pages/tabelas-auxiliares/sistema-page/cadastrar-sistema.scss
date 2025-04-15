@@ -1,0 +1,11 @@
+.formulario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+  gap: 1em;
+}
+
+@media (max-width: 800px) {
+  .formulario-grid {
+    grid-template-columns: 1fr;
+  }
+}

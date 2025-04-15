@@ -66,7 +66,7 @@ const props = withDefaults(defineProps<PropsInputData>(), {
   mask: 'date',
   rules: () => [],
   icon: 'event',
-  outlined: true,
+  filled: true,
   color: 'primary',
   range: false,
 });
@@ -81,7 +81,7 @@ const inputRange = ref<{ from: string | null; to: string | null }>({
 
 const inputSingleDate = ref<string | null>(null);
 
-watch(inputRange, newRange => {
+watch(inputRange, (newRange) => {
   if (props.range && newRange.from && newRange.to) {
     inputString.value = `${newRange.from} - ${newRange.to}`;
   } else {
@@ -89,13 +89,13 @@ watch(inputRange, newRange => {
   }
 });
 
-watch(inputSingleDate, newDate => {
+watch(inputSingleDate, (newDate) => {
   if (!props.range) {
     inputString.value = newDate || '';
   }
 });
 
-watch(inputString, newString => {
+watch(inputString, (newString) => {
   if (props.range) {
     if (typeof newString === 'string' && newString.includes(' - ')) {
       const [from, to] = newString.split(' - ');

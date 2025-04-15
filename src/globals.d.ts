@@ -8,6 +8,7 @@ import type DataComponent from 'src/components/global/inputs-component/data/date
 import type ArquivoComponent from 'src/components/global/inputs-component/arquivo/file-component.vue';
 import type ContainerComponent from 'src/components/global/container-component/container-component.vue';
 import type BaseModalComponent from 'src/components/global/base-modal-component/base-modal-component.vue';
+import type ColorComponent from 'src/components/global/inputs-component/color/input-color-component.vue';
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -19,6 +20,8 @@ declare module '@vue/runtime-core' {
     DataComponent: typeof DataComponent;
     ArquivoComponent: typeof ArquivoComponent;
     ContainerComponent: typeof ContainerComponent;
+    ColorComponent: typeof ColorComponent;
+
     BaseModalComponent: typeof BaseModalComponent;
     IconComponent: typeof IconComponent;
   }

@@ -55,7 +55,7 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<PropsInputPadrao>(), {
-  outlined: true,
+  filled: true,
   corIcone: 'primary',
   textareaRows: 5,
   rules: () => [],

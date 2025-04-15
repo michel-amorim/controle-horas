@@ -16,3 +16,9 @@
     }
   }
 }
+
+@media (max-width: 800px) {
+  .container-page {
+    padding: $spacing-3xl $spacing-md;
+  }
+}

@@ -8,6 +8,7 @@ import DataComponent from 'src/components/global/inputs-component/data/date-comp
 import ArquivoComponent from 'src/components/global/inputs-component/arquivo/file-component.vue';
 import IconComponent from 'src/components/global/icon-component/icon-component.vue';
 import FormComponent from 'components/global/form-component/form-component.vue';
+import ColorComponent from 'components/global/inputs-component/color/input-color-component.vue';
 
 import ContainerComponent from 'components/global/container-component/container-component.vue';
 import BaseModalComponent from 'src/components/global/base-modal-component/base-modal-component.vue';
@@ -25,6 +26,8 @@ export default boot(({ app }) => {
   app.component('ArquivoComponent', ArquivoComponent);
   app.component('ContainerComponent', ContainerComponent);
   app.component('BaseModal', BaseModalComponent);
+  app.component('ColorComponent', ColorComponent);
+
   app.component('FormComponent', FormComponent);
   app.component(
     'TabelaComponent',

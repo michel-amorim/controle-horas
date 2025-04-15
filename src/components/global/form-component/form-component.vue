@@ -1,5 +1,5 @@
 <template>
-  <q-form @submit.prevent="onSubmit" @reset="onReset" ref="formRef" greedy class="q-mb-lg">
+  <q-form @submit.prevent="onSubmit" @reset="onReset" ref="formRef" greedy>
     <header>
       <h2>{{ titulo }}</h2>
     </header>
@@ -11,13 +11,7 @@
       </div>
 
       <div class="row items-center">
-        <BotaoComponent
-          v-if="!desativarSubmit"
-          outline
-          type="submit"
-          :label="submitLabel"
-          icone-direita="search"
-        />
+        <BotaoComponent v-if="!desativarSubmit" outline type="submit" :label="submitLabel" />
         <BotaoComponent
           v-if="!desativarReset"
           type="reset"

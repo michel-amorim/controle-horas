@@ -8,7 +8,7 @@ export const TabelasAuxiliaresRouter: PageConfig[] = [
     expansionName: RouteExpansionName.TabelaAuxiliares,
     children: [
       {
-        component: () => import('pages/tabelas-auxiliares/sistema-page/input-padrao-page.vue'),
+        component: () => import('pages/tabelas-auxiliares/sistema-page/cadastro-sistema-page.vue'),
         route: {
           path: '/sistema',
           name: Routename.Sistema,
@@ -26,16 +26,6 @@ export const TabelasAuxiliaresRouter: PageConfig[] = [
         },
         sidebar: {
           label: 'Empresa',
-        },
-      },
-      {
-        component: () => import('pages/tabelas-auxiliares/projeto-page/input-selecao-page.vue'),
-        route: {
-          path: '/projeto',
-          name: Routename.Projeto,
-        },
-        sidebar: {
-          label: 'Projeto',
         },
       },
     ],

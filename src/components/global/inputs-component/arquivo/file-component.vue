@@ -52,8 +52,9 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<PropsFile>(), {
-  borderless: true,
   iconColor: 'primary',
+  borderless: true,
+  filled: true,
   label: 'Arraste e solte os seus arquivos aqui ou clique para selecionar',
 });
 

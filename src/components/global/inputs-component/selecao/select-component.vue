@@ -65,7 +65,7 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<PropsInputSelecao<Value>>(), {
-  outlined: true,
+  filled: true,
   corIcone: 'primary',
   isChips: false,
   options: () => [],

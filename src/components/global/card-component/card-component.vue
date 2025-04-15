@@ -1,7 +1,7 @@
 <template>
   <q-card :class="classeCard" flat bordered class="container-card">
     <header>
-      <h1>{{ titulo }}</h1>
+      <h1 :class="centralizarHeader ? 'header-centralizado' : undefined">{{ titulo }}</h1>
 
       <nav v-if="acoes">
         <BotaoComponent
@@ -29,7 +29,9 @@ defineOptions({
   inheritAttrs: false,
 });
 
-withDefaults(defineProps<PropsCard>(), {});
+withDefaults(defineProps<PropsCard>(), {
+  centralizarHeader: false,
+});
 </script>
 
 <style lang="scss" src="./card-syles.scss" />

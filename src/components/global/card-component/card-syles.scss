@@ -2,10 +2,8 @@
   padding: $spacing-lg;
   border-radius: $spacing-sm;
 
-  h2 {
-    font-size: $font-size-xl;
-    font-weight: bold;
-    color: $primary;
+  .header-centralizado {
+    text-align: center;
   }
 
   .separador {
