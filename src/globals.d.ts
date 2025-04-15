@@ -6,7 +6,7 @@ import type InputComponent from 'src/components/global/inputs-component/padrao/i
 import type SelecaoComponent from 'src/components/global/inputs-component/selecao/select-component.vue';
 import type DataComponent from 'src/components/global/inputs-component/data/date-component.vue';
 import type ArquivoComponent from 'src/components/global/inputs-component/arquivo/file-component.vue';
-import type ContainerComponent from 'components/global/container-component/container-component.vue';
+import type ContainerComponent from 'src/components/global/container-component/container-component.vue';
 import type BaseModalComponent from 'src/components/global/base-modal-component/base-modal-component.vue';
 
 declare module '@vue/runtime-core' {

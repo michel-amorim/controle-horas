@@ -7,8 +7,8 @@ export type PropsEstado = Pick<QBtnProps, 'disable' | 'flat' | 'outline' | 'dens
 type PropsConteudo = Pick<QBtnProps, 'label' | 'onClick' | 'type' | 'href' | 'textColor' | 'color'>;
 
 type PropsVariante = {
-  iconeEsquerda?: MaterialIconValues;
-  iconeDireita?: MaterialIconValues;
+  iconeEsquerda?: MaterialIconValues | undefined;
+  iconeDireita?: MaterialIconValues | undefined;
 };
 
 export interface PropsBotao extends PropsEstado, PropsVariante, PropsConteudo {

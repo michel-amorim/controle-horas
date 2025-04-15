@@ -1,10 +1,9 @@
 .drawer-container {
-  padding: 0 $spacing-md 0 $spacing-md;
   color: $primary;
   font-weight: 500;
 
   .item-ativo {
-    background: $color-primary-900 !important;
+    background: $primary !important;
     color: $color-gray-400 !important;
     font-weight: 600;
   }

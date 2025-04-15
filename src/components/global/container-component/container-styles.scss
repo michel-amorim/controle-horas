@@ -5,14 +5,13 @@
   .container {
     max-width: $max-width-container;
     margin: 0 auto;
+
     header {
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-md;
+
       h1 {
         text-transform: uppercase;
         color: $primary;
-      }
-      h1 {
-        margin-bottom: $spacing-sm;
       }
     }
   }

@@ -1,18 +1,13 @@
 export enum Routename {
   Auth = 'login',
   Home = 'home',
-  //
-  InputPadrao = 'input-padrao',
-  InputSelecao = 'input-selecao',
-  InputData = 'input-data',
-  InputArquivo = 'input-arquivo',
-  //
-  Botao = 'botoes',
-  Dropdown = 'dropdown',
-  //
-  TABELA = 'tabela',
-  teste = 'teste',
-
+  // Cadastro auxiliar
+  Empresa = 'empresa',
+  Projeto = 'projeto',
+  Sistema = 'sistema',
+  // Controle de horas
+  ConsultaHoras = 'consultar-horas',
+  CadastrarHoras = 'cadastrar-horas',
   // Error
   Error404 = 'error-404',
   Forbidden403 = 'error-403',

@@ -1,7 +1,21 @@
 <template>
   <q-card :class="classeCard" flat bordered class="container-card">
     <header>
-      <h2>{{ titulo }}</h2>
+      <h1>{{ titulo }}</h1>
+
+      <nav v-if="acoes">
+        <BotaoComponent
+          v-for="(button, index) in acoes"
+          :key="`${index}-${button.id}`"
+          :color="button.color"
+          :flat="button.flat"
+          :icon="button.iconeEsquerda"
+          :label="button.label"
+          :outline="button.outline"
+          :tooltip="button.tooltip"
+          @click="button.onClick"
+        />
+      </nav>
     </header>
     <q-separator class="separador" />
     <slot></slot>

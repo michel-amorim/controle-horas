@@ -13,7 +13,7 @@
     :rows-per-page-options="[0]"
     no-data-label="Nenhum resultado encontrado!"
     row-key="name"
-    table-class="linha-cor "
+    table-class="linha-cor"
   >
     <template #body-cell="props">
       <q-td :props="props" class="vertical-middle">
@@ -42,10 +42,13 @@
 import { computed, useModel } from 'vue';
 import type { TableProps, TableSlot } from './tabela-interface';
 import PaginacaoComponent from 'components/global/tabela-component/paginacao-component.vue';
+import { QTableColumn } from 'quasar';
 
 defineOptions({
   inheritAttrs: false,
 });
+
+defineSlots<TableSlot<Datum>>();
 
 const props = withDefaults(defineProps<TableProps<Datum>>(), {
   rows: () => [],
@@ -53,10 +56,20 @@ const props = withDefaults(defineProps<TableProps<Datum>>(), {
   classeTabela: '',
 });
 
-defineSlots<TableSlot<Datum>>();
 const model = useModel(props, 'modelValue');
-const columns = computed(() =>
-  props.columns.map(col => ({ ...col, headerClasses: 'vertical-middle' })),
+
+const columns = computed<QTableColumn[]>(() =>
+  props.columns.map((col) => {
+    const name = col.name ?? (typeof col.field === 'string' ? col.field : 'sem-nome');
+    const label = col.label ?? name;
+
+    return {
+      ...col,
+      name,
+      label,
+      headerClasses: 'vertical-middle',
+    } as QTableColumn;
+  }),
 );
 
 const rows = computed(() =>

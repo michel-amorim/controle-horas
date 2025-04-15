@@ -2,9 +2,9 @@ import type { QTableColumn, QTableProps } from 'quasar';
 import type { PropsPaginacao } from './paginacao-interface';
 
 export type TableColumn<Field> = {
+  name?: string;
   field: Field;
   label?: string;
-  name?: string;
   required?: boolean;
   align?: QTableColumn['align'];
   sortable?: QTableColumn['sortable'];
@@ -28,7 +28,6 @@ export type TableRow<
 > = {
   [Column in Columns]: Entity[Column];
 };
-
 export interface TableProps<
   Entity extends Record<Columns, Value>,
   ExtraColumns extends string = string,
@@ -36,7 +35,7 @@ export interface TableProps<
   Value = unknown,
 > {
   rows: Entity[];
-  columns: QTableProps['columns'];
+  columns: TableColumn<Columns>[];
   modelValue?: PropsPaginacao['modelValue'];
   paginacao?: PropsPaginacao['totalPaginas'];
   dense?: QTableProps['dense'];
