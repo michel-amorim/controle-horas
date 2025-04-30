@@ -8,7 +8,7 @@
         <BotaoComponent label="Cadastrar hora" @click="cadastrarHoras" />
       </template>
     </FormComponent>
-    <TabelaComponent :rows="mockControleHorasData" :columns="ControleHorasColunas" />
+    <TabelaComponent :rows="[]" :columns="ControleHorasColunas" />
   </ContainerComponent>
 </template>
 
@@ -16,7 +16,7 @@
 import FormComponent from 'src/components/global/form-component/form-component.vue';
 import TabelaComponent from 'src/components/global/tabela-component/tabela-component.vue';
 import { ref } from 'vue';
-import { ControleHorasColunas, mockControleHorasData } from './controle-horas-colunas';
+import { ControleHorasColunas } from './controle-horas-colunas';
 import { Dialog } from 'quasar';
 import CadastrarHorasModal from 'src/components/modals/cadastrar-horas/cadastrar-horas-modal.vue';
 

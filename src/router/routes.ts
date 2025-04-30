@@ -3,12 +3,10 @@ import { Routename } from './router-names';
 import type { PageConfig } from './config/routes-types';
 import { ErrorPublicRouter } from 'src/pages/error/error-publico/error-route';
 
-import { AuthRouter } from 'src/pages/auth/auth-router';
 import { TabelasAuxiliaresRouter } from 'src/pages/tabelas-auxiliares/tabelas-auxiliares-router';
 import { ControleHorasRouter } from 'src/pages/controle-horas/home-router';
 
 export const Routes: PageConfig[] = [
-  ...AuthRouter,
   ...HomeRouter,
   ...ControleHorasRouter,
   ...TabelasAuxiliaresRouter,
