@@ -4,7 +4,7 @@ import { Routename } from '../router-names';
 import type { LayoutType, LayoutVariant, SidebarRouteConfig, PageConfig } from './routes-types';
 
 function getRoutesFromLayout(layout: LayoutVariant): PageConfig[] {
-  return Routes.filter(route => (route.layout || 'main') === layout);
+  return Routes.filter((route) => (route.layout || 'main') === layout);
 }
 
 function getLayouts(): LayoutVariant[] {
@@ -15,7 +15,7 @@ function getLayouts(): LayoutVariant[] {
 
 function processSidebar(items: PageConfig[]): SidebarRouteConfig[] {
   return items
-    .map(item => {
+    .map((item) => {
       if (!('sidebar' in item) && !('children' in item) && !item.sidebar) {
         return null;
       }
@@ -46,7 +46,7 @@ export function getSidebar(layout: LayoutType): SidebarRouteConfig[] {
 }
 
 function processRoutes(items: PageConfig[]): RouteRecordRaw[] {
-  return items.flatMap(item => {
+  return items.flatMap((item) => {
     if ('route' in item && 'component' in item) {
       return {
         path: item.route.path,
@@ -90,7 +90,7 @@ export function getRoutes(): RouteRecordRaw[] {
     [
       {
         path: '',
-        redirect: { name: Routename.Auth },
+        redirect: { name: Routename.Home },
       },
     ],
   );
