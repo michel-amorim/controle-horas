@@ -14,8 +14,10 @@ export default defineConfigWithVueTs(
      * relevant folders and files).
      *
      * ESLint requires "ignores" key to be the only one in this object
-     */
-    // ignores: []
+     // */
+    ignores: [
+      "api-client/**"
+    ]
   },
 
   pluginQuasar.configs.recommended(),
@@ -42,7 +44,10 @@ export default defineConfigWithVueTs(
         'error',
         { prefer: 'type-imports' }
       ],
-    }
+    },
+    ignores: [
+      "api-client/**"
+    ]
   },
   // https://github.com/vuejs/eslint-config-typescript
   vueTsConfigs.recommendedTypeChecked,
