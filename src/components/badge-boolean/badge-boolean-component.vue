@@ -11,6 +11,6 @@ const props = defineProps<{
   valor: boolean;
 }>();
 
-const badgeColor = props.valor ? 'positive' : 'warning';
-const labelTexto = props.valor ? 'Concluído' : 'pendente';
+const badgeColor = props.valor ? 'negative' : 'info';
+const labelTexto = props.valor ? 'Fechado' : 'Aberto';
 </script>

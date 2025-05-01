@@ -1,0 +1,12 @@
+.container-modal {
+  width: 100%;
+  max-width: 600px !important;
+  .content-aviso {
+    font-size: $font-size-md;
+    line-height: $spacing-lg;
+
+    span {
+      font-weight: bolder;
+    }
+  }
+}

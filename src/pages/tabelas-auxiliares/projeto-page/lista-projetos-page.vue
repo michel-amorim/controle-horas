@@ -10,7 +10,7 @@
         <badge-boolean-component :valor="cell" />
       </template>
       <template #acao="{ row }">
-        <BotaoComponent :label="row.concluido ? 'Fechar' : 'Abrir'" @click="acaoProjeto(row)" />
+        <DropdownComponent :itens="dropdonwItens(row)" />
       </template>
     </tabela-component>
   </ContainerComponent>
@@ -25,6 +25,7 @@ import { ProjetoService } from 'src/service/projetos/projeto.service';
 import BadgeBooleanComponent from 'src/components/badge-boolean/badge-boolean-component.vue';
 import ModalCadastrarProjeto from 'src/components/modals/cadastrar-projetos/cadastrar-horas-modal.vue';
 import { Dialog } from 'quasar';
+import { dropdonwItens } from './acoes-tabela';
 
 const dadosTabela = ref<Projeto[]>([]);
 
@@ -39,16 +40,6 @@ const cadastrarNovoProjeto = () => {
   }).onOk(() => {
     void listaDeProjetos();
   });
-};
-
-const acaoProjeto = async ({ id, concluido }: Projeto) => {
-  const servico = concluido
-    ? ProjetoService.alterarProjetoFechar
-    : ProjetoService.alterarProjetoAbrir;
-
-  const { status } = await servico(id);
-
-  if (status === 200) void listaDeProjetos();
 };
 
 onMounted(() => listaDeProjetos());

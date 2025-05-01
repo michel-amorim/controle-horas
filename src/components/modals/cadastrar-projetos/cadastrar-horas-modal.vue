@@ -2,7 +2,7 @@
   <base-modal-component
     ref="baseModal"
     modal-class="container-modal"
-    titulo="Cadastrar horas"
+    titulo="Cadastrar projeto"
     @clickDireito="cadastrarProjeto"
   >
     <form-component desativar-submit desativar-reset @submit="cadastrarProjeto">
@@ -43,6 +43,7 @@ import FormComponent from 'src/components/global/form-component/form-component.v
 import FormRules from 'src/utils/form/form-rules';
 import { ProjetoService } from 'src/service/projetos/projeto.service';
 import type { AdicionarProjetoDto } from 'src/api-client';
+import { StatusHttpSucesso } from 'src/constants/status-http-sucesso';
 
 const baseModal = ref();
 const emit = defineEmits(['ok']);
@@ -56,7 +57,7 @@ const formulario = ref<AdicionarProjetoDto>({
 
 const cadastrarProjeto = async () => {
   const { status } = await ProjetoService.cadastrar(formulario.value);
-  if (status === 201) {
+  if (status === StatusHttpSucesso.CREATED) {
     emit('ok');
     baseModal.value.baseModal = false;
   }
