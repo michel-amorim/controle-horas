@@ -35,5 +35,12 @@ export function dropdonwItens(linhaTabela: Projeto) {
     icon: 'schedule',
   };
 
-  return [cadastrarHoras, atualizarProjeto, visualizacaoCompleta];
+  const editarCadastroProjeto = {
+    id: 'editar-cadastro',
+    label: 'Editar cadastro projeto',
+    icon: 'edit',
+    onClick: () => alert('Precisa fazer o endpoint!'),
+  };
+
+  return [cadastrarHoras, atualizarProjeto, visualizacaoCompleta, editarCadastroProjeto];
 }
