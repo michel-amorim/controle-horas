@@ -1,0 +1,23 @@
+.container-modal {
+  width: 100%;
+  max-width: 700px !important;
+
+  .formulario-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .linha {
+    width: 100%;
+  }
+
+  .linha-dupla {
+    display: flex;
+    gap: 16px;
+
+    & > * {
+      flex: 1;
+    }
+  }
+}

@@ -3,8 +3,8 @@ export enum Routename {
   Home = 'home',
   // Cadastro auxiliar
   Empresa = 'empresa',
-  Projeto = 'projeto',
-  Sistema = 'sistema',
+  ListaProjeto = 'lista-projeto',
+  CadastrarProjetos = 'cadastar-projetos',
   // Controle de horas
   ConsultaHoras = 'consultar-horas',
   CadastrarHoras = 'cadastrar-horas',

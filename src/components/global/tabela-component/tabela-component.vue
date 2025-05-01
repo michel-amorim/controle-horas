@@ -20,8 +20,7 @@
         <template v-if="props.col.field === 'acao'">
           <slot :cell="props.value" :name="props.col.field" :row="props.row" />
         </template>
-
-        <template v-else-if="props.value">
+        <template v-else-if="props.value !== undefined && props.value !== null">
           <slot :cell="props.value" :name="props.col.field" :row="props.row">
             {{ props.value }}
           </slot>

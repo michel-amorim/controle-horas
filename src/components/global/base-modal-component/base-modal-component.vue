@@ -1,37 +1,41 @@
 <template>
   <q-dialog :id="uniqueId" v-model="baseModal" :full-width="fullWidth" :persistent="persistent">
     <q-card :class="modalClass" class="container-base-modal">
-      <!-- cabecalho modal -->
+      <!-- cabeçalho -->
       <q-card-section class="container-header">
         <q-icon v-if="icone" :color="corCabecalho" :name="icone" class="content-icon" />
         <h1 :class="`text-${corCabecalho}`">{{ titulo }}</h1>
         <q-space />
       </q-card-section>
+
       <q-separator spaced />
-      <!-- skeleton para carregamento -->
+
+      <!-- skeleton -->
       <q-card-section v-if="skeleton" class="q-px-none">
         <q-skeleton
           v-for="n in quantidadeSkeleton"
-          height="24px"
           :key="n"
+          height="24px"
           type="text"
           class="q-mb-xs"
         />
       </q-card-section>
-      <!-- conteudo modal -->
+
+      <!-- conteúdo -->
       <q-card-section v-else class="q-px-none">
-        <slot></slot>
+        <slot />
       </q-card-section>
-      <!-- navegacao/rodepe -->
+
+      <!-- rodapé -->
       <q-card-section :class="botaoClass">
-        <BotaoComponent
+        <botao-component
           v-if="labelBotaoEsquerdo"
           :disable="disableBotaoEsquerdo"
           outline
           :label="labelBotaoEsquerdo"
           v-close-popup
         />
-        <BotaoComponent
+        <botao-component
           v-if="labelBotaoDireito"
           :label="labelBotaoDireito"
           @click="clickDireito"
@@ -62,32 +66,30 @@ const props = withDefaults(defineProps<PropsModal>(), {
 });
 
 const emit = defineEmits(['clickDireito', 'clickEsquerdo']);
+
 const baseModal = ref(true);
 const uniqueId = gerarId(props.titulo || 'padrao', 'modal');
 
 const botaoClass = computed(() => {
-  if (props.labelBotaoEsquerdo && props.labelBotaoDireito) {
-    return 'content-dois-botoes';
-  } else if (props.labelBotaoEsquerdo) {
-    return 'content-botao-esquerdo';
-  } else if (props.labelBotaoDireito) {
-    return 'content-botao-direito';
-  }
+  if (props.labelBotaoEsquerdo && props.labelBotaoDireito) return 'content-dois-botoes';
+  if (props.labelBotaoEsquerdo) return 'content-botao-esquerdo';
+  if (props.labelBotaoDireito) return 'content-botao-direito';
   return '';
 });
 
 const clickDireito = () => {
-  emit('clickEsquerdo');
+  emit('clickDireito');
 };
 
 const clickEsquerdo = () => {
-  emit('clickDireito');
+  emit('clickEsquerdo');
 };
 
 defineExpose({
   clickEsquerdo,
   clickDireito,
+  baseModal,
 });
 </script>
 
-<style src="./base-modal-styles.scss" lang="scss" />
+<style lang="scss" src="./base-modal-styles.scss" />
