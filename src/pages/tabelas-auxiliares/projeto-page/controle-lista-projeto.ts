@@ -8,4 +8,5 @@ export const ListaProjetosColunas: TableColumn<ListaProjetosColunasType>[] = [
   { label: 'Origem', field: 'origem', align: 'center' },
   { label: 'Horas Maximas', field: 'horasMaxima', align: 'center' },
   { label: 'Concluido', field: 'concluido', align: 'center' },
+  { label: 'Ação', field: 'acao', align: 'center' },
 ];

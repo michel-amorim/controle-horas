@@ -9,6 +9,9 @@
       <template #concluido="{ cell }">
         <badge-boolean-component :valor="cell" />
       </template>
+      <template #acao="{ row }">
+        <BotaoComponent :label="row.concluido ? 'Fechar' : 'Abrir'" @click="acaoProjeto(row)" />
+      </template>
     </tabela-component>
   </ContainerComponent>
 </template>
@@ -36,6 +39,16 @@ const cadastrarNovoProjeto = () => {
   }).onOk(() => {
     void listaDeProjetos();
   });
+};
+
+const acaoProjeto = async ({ id, concluido }: Projeto) => {
+  const servico = concluido
+    ? ProjetoService.alterarProjetoFechar
+    : ProjetoService.alterarProjetoAbrir;
+
+  const { status } = await servico(id);
+
+  if (status === 200) void listaDeProjetos();
 };
 
 onMounted(() => listaDeProjetos());
