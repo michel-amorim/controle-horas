@@ -3,6 +3,7 @@
     ref="baseModal"
     modal-class="container-modal"
     :titulo="`projeto ${linhaTabela.nome}`"
+    :skeleton="loading"
   >
     <pre>{{ listaAtividadesProjeto }}</pre>
   </base-modal-component>
@@ -18,14 +19,17 @@ const props = defineProps<{
   linhaTabela: Projeto;
 }>();
 const listaAtividadesProjeto = ref<Atividade[]>([]);
+const loading = ref(false);
 
 const buscarDetalhesProjeto = async () => {
+  loading.value = true;
   const { status, data } = await ProjetoService.listarAtvidadesPorID(props.linhaTabela.id, {
     mensagem: false,
     loading: false,
   });
 
   if (status === StatusHttpSucesso.OK) listaAtividadesProjeto.value = data;
+  loading.value = false;
 };
 
 onMounted(() => buscarDetalhesProjeto());
