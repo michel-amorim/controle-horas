@@ -23,7 +23,7 @@ const loading = ref(false);
 
 const buscarDetalhesProjeto = async () => {
   loading.value = true;
-  const { status, data } = await ProjetoService.listarAtvidadesPorID(props.linhaTabela.id, {
+  const { status, data } = await ProjetoService.listarProjetosPorID(props.linhaTabela.id, {
     mensagem: false,
     loading: false,
   });

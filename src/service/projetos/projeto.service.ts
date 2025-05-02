@@ -9,6 +9,6 @@ export const ProjetoService = criarServico({
   cadastrar: (dto: AdicionarProjetoDto) => api.projetoControllerAdicionar(dto),
   alterarProjetoAbrir: (id: string) => api.projetoControllerAbrir(id),
   alterarProjetoFechar: (id: string) => api.projetoControllerFechar(id),
-  listarAtvidadesPorID: (id: string) => api.projetoControllerListarAtividades(id),
-  listarAtvidades: () => api.projetoControllerListar(),
+  listarProjetosPorID: (id: string) => api.projetoControllerListarAtividades(id),
+  listarProjetos: () => api.projetoControllerListar(),
 });

@@ -30,7 +30,7 @@ import { dropdonwItens } from './acoes-tabela';
 const dadosTabela = ref<Projeto[]>([]);
 
 const listaDeProjetos = async () => {
-  const { data } = await ProjetoService.listarAtvidades(undefined, { mensagem: false });
+  const { data } = await ProjetoService.listarProjetos(undefined, { mensagem: false });
   if (data) dadosTabela.value = data;
 };
 

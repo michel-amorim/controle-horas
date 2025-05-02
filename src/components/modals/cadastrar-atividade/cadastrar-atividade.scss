@@ -1,0 +1,10 @@
+.container-modal {
+  width: 100%;
+  max-width: 700px !important;
+
+  .formulario-campos {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+}
