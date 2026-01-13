@@ -34,12 +34,13 @@
 import { onMounted, ref } from 'vue';
 import FormComponent from 'src/components/global/form-component/form-component.vue';
 import type { AdicionarAtividadeDto, Projeto } from 'src/api-client';
-import { AtividadeService } from 'src/service/atividades/atividades.service';
 import { StatusHttpSucesso } from 'src/constants/status-http-sucesso';
 import { ProjetoService } from 'src/service/projetos/projeto.service';
 import FormRules from 'src/utils/form/form-rules';
+import { Notify } from 'quasar';
 
 const baseModal = ref();
+const emit = defineEmits(['ok']);
 const opcoesProjeto = ref<Projeto[]>([]);
 
 const formulario = ref<AdicionarAtividadeDto>({
@@ -49,15 +50,36 @@ const formulario = ref<AdicionarAtividadeDto>({
 });
 
 const cadastrarNovaAtividade = async () => {
-  const { status } = await AtividadeService.adicionarAtividade(formulario.value);
-  if (status === StatusHttpSucesso.CREATED) baseModal.value?.fechar();
+  try {
+    const { status } = await ProjetoService.cadastrarAtividade(formulario.value, {
+      mensagem: false,
+    });
+    if (status === StatusHttpSucesso.CREATED) {
+      emit('ok');
+      baseModal.value?.fechar();
+    }
+  } catch (error) {
+    console.error('Erro ao cadastrar atividade:', error);
+    Notify.create({
+      type: 'negative',
+      message: 'Erro ao cadastrar atividade',
+    });
+  }
 };
 
 const obterProjetos = async () => {
-  const { data, status } = await ProjetoService.listarProjetos(undefined, {
-    mensagem: false,
-  });
-  if (status === StatusHttpSucesso.OK) opcoesProjeto.value = data;
+  try {
+    const { data, status } = await ProjetoService.listar(undefined, {
+      mensagem: false,
+    });
+    if (status === StatusHttpSucesso.OK) opcoesProjeto.value = data;
+  } catch (error) {
+    console.error('Erro ao carregar projetos:', error);
+    Notify.create({
+      type: 'negative',
+      message: 'Erro ao carregar projetos',
+    });
+  }
 };
 
 onMounted(() => void obterProjetos());

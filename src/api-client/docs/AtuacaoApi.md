@@ -4,9 +4,115 @@ All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**atuacaoControllerFinalizar**](#atuacaocontrollerfinalizar) | **POST** /atuacao/{id}/fechar | Finaliza uma atividade.|
+|[**atuacaoControllerAtualizar**](#atuacaocontrolleratualizar) | **PATCH** /atuacao/{id} | Atualiza uma atuação.|
+|[**atuacaoControllerDeletar**](#atuacaocontrollerdeletar) | **DELETE** /atuacao/{id} | Deleta uma atuação.|
+|[**atuacaoControllerFinalizar**](#atuacaocontrollerfinalizar) | **PATCH** /atuacao/{id}/fechar | Finaliza uma atividade.|
 |[**atuacaoControllerIniciar**](#atuacaocontrolleriniciar) | **POST** /atuacao | Inicia uma atividade.|
 |[**atuacaoControllerRelatorio**](#atuacaocontrollerrelatorio) | **GET** /atuacao/relatorio | Obtem o relatorio de um ano e mes.|
+
+# **atuacaoControllerAtualizar**
+> Atuacao atuacaoControllerAtualizar(atualizarAtuacaoDto)
+
+
+### Example
+
+```typescript
+import {
+    AtuacaoApi,
+    Configuration,
+    AtualizarAtuacaoDto
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new AtuacaoApi(configuration);
+
+let id: string; // (default to undefined)
+let atualizarAtuacaoDto: AtualizarAtuacaoDto; //
+
+const { status, data } = await apiInstance.atuacaoControllerAtualizar(
+    id,
+    atualizarAtuacaoDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **atualizarAtuacaoDto** | **AtualizarAtuacaoDto**|  | |
+| **id** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**Atuacao**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **atuacaoControllerDeletar**
+> Atuacao atuacaoControllerDeletar()
+
+
+### Example
+
+```typescript
+import {
+    AtuacaoApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new AtuacaoApi(configuration);
+
+let id: string; // (default to undefined)
+
+const { status, data } = await apiInstance.atuacaoControllerDeletar(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**Atuacao**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **atuacaoControllerFinalizar**
 > Atuacao atuacaoControllerFinalizar(atuacaoDto)
@@ -58,7 +164,7 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**201** |  |  -  |
+|**200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -11,6 +11,9 @@ docs/AtividadeApi.md
 docs/Atuacao.md
 docs/AtuacaoApi.md
 docs/AtuacaoDto.md
+docs/AtualizarAtividadeDto.md
+docs/AtualizarAtuacaoDto.md
+docs/AtualizarProjetoDto.md
 docs/Projeto.md
 docs/ProjetoApi.md
 docs/RelatorioEntradaItemDto.md

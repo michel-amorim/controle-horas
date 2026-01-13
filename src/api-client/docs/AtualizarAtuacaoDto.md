@@ -1,24 +1,24 @@
-# AtuacaoDto
+# AtualizarAtuacaoDto
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**descricao** | **string** |  | [default to undefined]
+**descricao** | **string** |  | [optional] [default to undefined]
 **descricaoInicio** | **string** |  | [optional] [default to undefined]
 **descricaoFim** | **string** |  | [optional] [default to undefined]
-**atividadeId** | **string** |  | [default to undefined]
-**dataHora** | **string** |  | [default to undefined]
-**inicio** | **string** |  | [default to undefined]
-**fim** | **string** |  | [default to undefined]
+**atividadeId** | **string** |  | [optional] [default to undefined]
+**dataHora** | **string** |  | [optional] [default to undefined]
+**inicio** | **string** |  | [optional] [default to undefined]
+**fim** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { AtuacaoDto } from './api';
+import { AtualizarAtuacaoDto } from './api';
 
-const instance: AtuacaoDto = {
+const instance: AtualizarAtuacaoDto = {
     descricao,
     descricaoInicio,
     descricaoFim,

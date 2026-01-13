@@ -200,6 +200,18 @@ export interface AtuacaoDto {
      * @type {string}
      * @memberof AtuacaoDto
      */
+    'descricaoInicio'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtuacaoDto
+     */
+    'descricaoFim'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtuacaoDto
+     */
     'atividadeId': string;
     /**
      * 
@@ -207,6 +219,123 @@ export interface AtuacaoDto {
      * @memberof AtuacaoDto
      */
     'dataHora': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtuacaoDto
+     */
+    'inicio': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtuacaoDto
+     */
+    'fim': string;
+}
+/**
+ * 
+ * @export
+ * @interface AtualizarAtividadeDto
+ */
+export interface AtualizarAtividadeDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtividadeDto
+     */
+    'nome'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtividadeDto
+     */
+    'descricao'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtividadeDto
+     */
+    'projetoId'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface AtualizarAtuacaoDto
+ */
+export interface AtualizarAtuacaoDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtuacaoDto
+     */
+    'descricao'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtuacaoDto
+     */
+    'descricaoInicio'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtuacaoDto
+     */
+    'descricaoFim'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtuacaoDto
+     */
+    'atividadeId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtuacaoDto
+     */
+    'dataHora'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtuacaoDto
+     */
+    'inicio'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarAtuacaoDto
+     */
+    'fim'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface AtualizarProjetoDto
+ */
+export interface AtualizarProjetoDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarProjetoDto
+     */
+    'nome'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarProjetoDto
+     */
+    'origem'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AtualizarProjetoDto
+     */
+    'cor'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AtualizarProjetoDto
+     */
+    'horasMaxima'?: number;
 }
 /**
  * 
@@ -352,6 +481,80 @@ export const AtividadeApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @summary Atualiza uma atividade.
+         * @param {string} id 
+         * @param {AtualizarAtividadeDto} atualizarAtividadeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atividadeControllerAtualizarAtividade: async (id: string, atualizarAtividadeDto: AtualizarAtividadeDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('atividadeControllerAtualizarAtividade', 'id', id)
+            // verify required parameter 'atualizarAtividadeDto' is not null or undefined
+            assertParamExists('atividadeControllerAtualizarAtividade', 'atualizarAtividadeDto', atualizarAtividadeDto)
+            const localVarPath = `/atividade/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(atualizarAtividadeDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Deleta uma atividade.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atividadeControllerDeletarAtividade: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('atividadeControllerDeletarAtividade', 'id', id)
+            const localVarPath = `/atividade/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Obtem detalhes de uma atividade.
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -369,7 +572,7 @@ export const AtividadeApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -453,6 +656,33 @@ export const AtividadeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Atualiza uma atividade.
+         * @param {string} id 
+         * @param {AtualizarAtividadeDto} atualizarAtividadeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async atividadeControllerAtualizarAtividade(id: string, atualizarAtividadeDto: AtualizarAtividadeDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Atividade>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.atividadeControllerAtualizarAtividade(id, atualizarAtividadeDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AtividadeApi.atividadeControllerAtualizarAtividade']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Deleta uma atividade.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async atividadeControllerDeletarAtividade(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Atividade>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.atividadeControllerDeletarAtividade(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AtividadeApi.atividadeControllerDeletarAtividade']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Obtem detalhes de uma atividade.
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -500,6 +730,27 @@ export const AtividadeApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @summary Atualiza uma atividade.
+         * @param {string} id 
+         * @param {AtualizarAtividadeDto} atualizarAtividadeDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atividadeControllerAtualizarAtividade(id: string, atualizarAtividadeDto: AtualizarAtividadeDto, options?: RawAxiosRequestConfig): AxiosPromise<Atividade> {
+            return localVarFp.atividadeControllerAtualizarAtividade(id, atualizarAtividadeDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Deleta uma atividade.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atividadeControllerDeletarAtividade(id: string, options?: RawAxiosRequestConfig): AxiosPromise<Atividade> {
+            return localVarFp.atividadeControllerDeletarAtividade(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Obtem detalhes de uma atividade.
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -543,6 +794,31 @@ export class AtividadeApi extends BaseAPI {
 
     /**
      * 
+     * @summary Atualiza uma atividade.
+     * @param {string} id 
+     * @param {AtualizarAtividadeDto} atualizarAtividadeDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AtividadeApi
+     */
+    public atividadeControllerAtualizarAtividade(id: string, atualizarAtividadeDto: AtualizarAtividadeDto, options?: RawAxiosRequestConfig) {
+        return AtividadeApiFp(this.configuration).atividadeControllerAtualizarAtividade(id, atualizarAtividadeDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Deleta uma atividade.
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AtividadeApi
+     */
+    public atividadeControllerDeletarAtividade(id: string, options?: RawAxiosRequestConfig) {
+        return AtividadeApiFp(this.configuration).atividadeControllerDeletarAtividade(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Obtem detalhes de uma atividade.
      * @param {string} id 
      * @param {*} [options] Override http request option.
@@ -577,6 +853,80 @@ export const AtuacaoApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
+         * @summary Atualiza uma atuação.
+         * @param {string} id 
+         * @param {AtualizarAtuacaoDto} atualizarAtuacaoDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atuacaoControllerAtualizar: async (id: string, atualizarAtuacaoDto: AtualizarAtuacaoDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('atuacaoControllerAtualizar', 'id', id)
+            // verify required parameter 'atualizarAtuacaoDto' is not null or undefined
+            assertParamExists('atuacaoControllerAtualizar', 'atualizarAtuacaoDto', atualizarAtuacaoDto)
+            const localVarPath = `/atuacao/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(atualizarAtuacaoDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Deleta uma atuação.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atuacaoControllerDeletar: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('atuacaoControllerDeletar', 'id', id)
+            const localVarPath = `/atuacao/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Finaliza uma atividade.
          * @param {string} id 
          * @param {AtuacaoDto} atuacaoDto 
@@ -597,7 +947,7 @@ export const AtuacaoApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -707,6 +1057,33 @@ export const AtuacaoApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Atualiza uma atuação.
+         * @param {string} id 
+         * @param {AtualizarAtuacaoDto} atualizarAtuacaoDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async atuacaoControllerAtualizar(id: string, atualizarAtuacaoDto: AtualizarAtuacaoDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Atuacao>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.atuacaoControllerAtualizar(id, atualizarAtuacaoDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AtuacaoApi.atuacaoControllerAtualizar']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Deleta uma atuação.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async atuacaoControllerDeletar(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Atuacao>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.atuacaoControllerDeletar(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AtuacaoApi.atuacaoControllerDeletar']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Finaliza uma atividade.
          * @param {string} id 
          * @param {AtuacaoDto} atuacaoDto 
@@ -758,6 +1135,27 @@ export const AtuacaoApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
+         * @summary Atualiza uma atuação.
+         * @param {string} id 
+         * @param {AtualizarAtuacaoDto} atualizarAtuacaoDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atuacaoControllerAtualizar(id: string, atualizarAtuacaoDto: AtualizarAtuacaoDto, options?: RawAxiosRequestConfig): AxiosPromise<Atuacao> {
+            return localVarFp.atuacaoControllerAtualizar(id, atualizarAtuacaoDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Deleta uma atuação.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atuacaoControllerDeletar(id: string, options?: RawAxiosRequestConfig): AxiosPromise<Atuacao> {
+            return localVarFp.atuacaoControllerDeletar(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Finaliza uma atividade.
          * @param {string} id 
          * @param {AtuacaoDto} atuacaoDto 
@@ -798,6 +1196,31 @@ export const AtuacaoApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class AtuacaoApi extends BaseAPI {
+    /**
+     * 
+     * @summary Atualiza uma atuação.
+     * @param {string} id 
+     * @param {AtualizarAtuacaoDto} atualizarAtuacaoDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AtuacaoApi
+     */
+    public atuacaoControllerAtualizar(id: string, atualizarAtuacaoDto: AtualizarAtuacaoDto, options?: RawAxiosRequestConfig) {
+        return AtuacaoApiFp(this.configuration).atuacaoControllerAtualizar(id, atualizarAtuacaoDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Deleta uma atuação.
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AtuacaoApi
+     */
+    public atuacaoControllerDeletar(id: string, options?: RawAxiosRequestConfig) {
+        return AtuacaoApiFp(this.configuration).atuacaoControllerDeletar(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary Finaliza uma atividade.
@@ -917,6 +1340,114 @@ export const ProjetoApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Atualiza um projeto.
+         * @param {string} id 
+         * @param {AtualizarProjetoDto} atualizarProjetoDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projetoControllerAtualizar: async (id: string, atualizarProjetoDto: AtualizarProjetoDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projetoControllerAtualizar', 'id', id)
+            // verify required parameter 'atualizarProjetoDto' is not null or undefined
+            assertParamExists('projetoControllerAtualizar', 'atualizarProjetoDto', atualizarProjetoDto)
+            const localVarPath = `/projeto/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(atualizarProjetoDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Calcula total de horas trabalhadas no projeto.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projetoControllerCalcularHoras: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projetoControllerCalcularHoras', 'id', id)
+            const localVarPath = `/projeto/{id}/horas-trabalhadas`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Deleta um projeto.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projetoControllerDeletar: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projetoControllerDeletar', 'id', id)
+            const localVarPath = `/projeto/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Obtem detalhes de um projeto.
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -1016,15 +1547,15 @@ export const ProjetoApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Lista atividades de um projeto.
-         * @param {string} projetoId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projetoControllerListarAtividades: async (projetoId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projetoId' is not null or undefined
-            assertParamExists('projetoControllerListarAtividades', 'projetoId', projetoId)
-            const localVarPath = `/projeto/{projetoId}/atividades`
-                .replace(`{${"projetoId"}}`, encodeURIComponent(String(projetoId)));
+        projetoControllerListarAtividades: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projetoControllerListarAtividades', 'id', id)
+            const localVarPath = `/projeto/{id}/atividades`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1085,6 +1616,46 @@ export const ProjetoApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Atualiza um projeto.
+         * @param {string} id 
+         * @param {AtualizarProjetoDto} atualizarProjetoDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projetoControllerAtualizar(id: string, atualizarProjetoDto: AtualizarProjetoDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Projeto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projetoControllerAtualizar(id, atualizarProjetoDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProjetoApi.projetoControllerAtualizar']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Calcula total de horas trabalhadas no projeto.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projetoControllerCalcularHoras(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projetoControllerCalcularHoras(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProjetoApi.projetoControllerCalcularHoras']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Deleta um projeto.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projetoControllerDeletar(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Projeto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projetoControllerDeletar(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProjetoApi.projetoControllerDeletar']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Obtem detalhes de um projeto.
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -1124,12 +1695,12 @@ export const ProjetoApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Lista atividades de um projeto.
-         * @param {string} projetoId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projetoControllerListarAtividades(projetoId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Atividade>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projetoControllerListarAtividades(projetoId, options);
+        async projetoControllerListarAtividades(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Atividade>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projetoControllerListarAtividades(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjetoApi.projetoControllerListarAtividades']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1166,6 +1737,37 @@ export const ProjetoApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary Atualiza um projeto.
+         * @param {string} id 
+         * @param {AtualizarProjetoDto} atualizarProjetoDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projetoControllerAtualizar(id: string, atualizarProjetoDto: AtualizarProjetoDto, options?: RawAxiosRequestConfig): AxiosPromise<Projeto> {
+            return localVarFp.projetoControllerAtualizar(id, atualizarProjetoDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Calcula total de horas trabalhadas no projeto.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projetoControllerCalcularHoras(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.projetoControllerCalcularHoras(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Deleta um projeto.
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projetoControllerDeletar(id: string, options?: RawAxiosRequestConfig): AxiosPromise<Projeto> {
+            return localVarFp.projetoControllerDeletar(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Obtem detalhes de um projeto.
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -1196,12 +1798,12 @@ export const ProjetoApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Lista atividades de um projeto.
-         * @param {string} projetoId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projetoControllerListarAtividades(projetoId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Atividade>> {
-            return localVarFp.projetoControllerListarAtividades(projetoId, options).then((request) => request(axios, basePath));
+        projetoControllerListarAtividades(id: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Atividade>> {
+            return localVarFp.projetoControllerListarAtividades(id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1235,6 +1837,43 @@ export class ProjetoApi extends BaseAPI {
      */
     public projetoControllerAdicionar(adicionarProjetoDto: AdicionarProjetoDto, options?: RawAxiosRequestConfig) {
         return ProjetoApiFp(this.configuration).projetoControllerAdicionar(adicionarProjetoDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Atualiza um projeto.
+     * @param {string} id 
+     * @param {AtualizarProjetoDto} atualizarProjetoDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjetoApi
+     */
+    public projetoControllerAtualizar(id: string, atualizarProjetoDto: AtualizarProjetoDto, options?: RawAxiosRequestConfig) {
+        return ProjetoApiFp(this.configuration).projetoControllerAtualizar(id, atualizarProjetoDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Calcula total de horas trabalhadas no projeto.
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjetoApi
+     */
+    public projetoControllerCalcularHoras(id: string, options?: RawAxiosRequestConfig) {
+        return ProjetoApiFp(this.configuration).projetoControllerCalcularHoras(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Deleta um projeto.
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjetoApi
+     */
+    public projetoControllerDeletar(id: string, options?: RawAxiosRequestConfig) {
+        return ProjetoApiFp(this.configuration).projetoControllerDeletar(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1275,13 +1914,13 @@ export class ProjetoApi extends BaseAPI {
     /**
      * 
      * @summary Lista atividades de um projeto.
-     * @param {string} projetoId 
+     * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjetoApi
      */
-    public projetoControllerListarAtividades(projetoId: string, options?: RawAxiosRequestConfig) {
-        return ProjetoApiFp(this.configuration).projetoControllerListarAtividades(projetoId, options).then((request) => request(this.axios, this.basePath));
+    public projetoControllerListarAtividades(id: string, options?: RawAxiosRequestConfig) {
+        return ProjetoApiFp(this.configuration).projetoControllerListarAtividades(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

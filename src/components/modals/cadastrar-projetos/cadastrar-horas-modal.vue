@@ -44,6 +44,7 @@ import FormRules from 'src/utils/form/form-rules';
 import { ProjetoService } from 'src/service/projetos/projeto.service';
 import type { AdicionarProjetoDto } from 'src/api-client';
 import { StatusHttpSucesso } from 'src/constants/status-http-sucesso';
+import { Notify } from 'quasar';
 
 const baseModal = ref();
 const emit = defineEmits(['ok']);
@@ -56,10 +57,18 @@ const formulario = ref<AdicionarProjetoDto>({
 });
 
 const cadastrarProjeto = async () => {
-  const { status } = await ProjetoService.cadastrar(formulario.value);
-  if (status === StatusHttpSucesso.CREATED) {
-    emit('ok');
-    baseModal.value.baseModal = false;
+  try {
+    const { status } = await ProjetoService.cadastrar(formulario.value);
+    if (status === StatusHttpSucesso.CREATED) {
+      emit('ok');
+      baseModal.value?.fechar?.();
+    }
+  } catch (error) {
+    console.error('Erro ao cadastrar projeto:', error);
+    Notify.create({
+      type: 'negative',
+      message: 'Erro ao cadastrar projeto',
+    });
   }
 };
 </script>

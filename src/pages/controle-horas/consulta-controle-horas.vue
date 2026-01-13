@@ -23,11 +23,11 @@ import FormComponent from 'src/components/global/form-component/form-component.v
 import TabelaComponent from 'src/components/global/tabela-component/tabela-component.vue';
 import { onMounted, ref } from 'vue';
 import { ControleHorasColunas } from './controle-horas-colunas';
-import { Dialog } from 'quasar';
+import { Dialog, Notify } from 'quasar';
 import { obterMesesAno } from 'src/constants/meses-constants';
 import { anoAtual, mesAtual } from 'src/utils/data-utils';
-import { AtividadeService } from 'src/service/atividades/atividades.service';
-import type { Atividade } from 'src/api-client';
+import { ProjetoService } from 'src/service/projetos/projeto.service';
+import type { RelatorioItemDto } from 'src/api-client';
 import { StatusHttpSucesso } from 'src/constants/status-http-sucesso';
 import CadastrarAtividadeModal from 'src/components/modals/cadastrar-atividade/cadastrar-atividade-modal.vue';
 
@@ -36,18 +36,35 @@ const formulario = ref<{ mes: number; ano: number }>({
   ano: anoAtual(),
 });
 
-const cadastrarHoras = () =>
+const cadastrarHoras = () => {
   Dialog.create({
     component: CadastrarAtividadeModal,
+  }).onOk(() => {
+    pesquisarAtividades();
   });
+};
 
-const dadosTabela = ref<Atividade[]>([]);
+const dadosTabela = ref<RelatorioItemDto[]>([]);
+const carregando = ref(false);
 
 const pesquisarAtividades = async () => {
-  const { data, status } = await AtividadeService.listarAtividadesGeral(formulario.value, {
-    mensagem: false,
-  });
-  if (status === StatusHttpSucesso.OK) dadosTabela.value = data;
+  try {
+    carregando.value = true;
+    const { data, status } = await ProjetoService.relatorio(formulario.value, {
+      mensagem: false,
+    });
+    if (status === StatusHttpSucesso.OK) {
+      dadosTabela.value = data || [];
+    }
+  } catch (error) {
+    console.error('Erro ao buscar atividades:', error);
+    Notify.create({
+      type: 'negative',
+      message: 'Erro ao buscar relatório de horas',
+    });
+  } finally {
+    carregando.value = false;
+  }
 };
 
 onMounted(() => void pesquisarAtividades());
