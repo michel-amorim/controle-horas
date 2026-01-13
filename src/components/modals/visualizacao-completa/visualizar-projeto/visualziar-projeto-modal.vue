@@ -22,14 +22,22 @@ const listaAtividadesProjeto = ref<Atividade[]>([]);
 const loading = ref(false);
 
 const buscarDetalhesProjeto = async () => {
-  loading.value = true;
-  const { status, data } = await ProjetoService.listarProjetosPorID(props.linhaTabela.id, {
-    mensagem: false,
-    loading: false,
-  });
+  try {
+    loading.value = true;
+    const { status, data } = await ProjetoService.listarAtividades(
+      { id: props.linhaTabela.id },
+      {
+        mensagem: false,
+        loading: false,
+      },
+    );
 
-  if (status === StatusHttpSucesso.OK) listaAtividadesProjeto.value = data;
-  loading.value = false;
+    if (status === StatusHttpSucesso.OK) listaAtividadesProjeto.value = data;
+  } catch (error) {
+    console.error('Erro ao buscar atividades:', error);
+  } finally {
+    loading.value = false;
+  }
 };
 
 onMounted(() => buscarDetalhesProjeto());

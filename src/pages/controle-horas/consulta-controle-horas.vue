@@ -37,10 +37,10 @@ const formulario = ref<{ mes: number; ano: number }>({
 });
 
 const cadastrarHoras = () => {
-  Dialog.create({
+  void Dialog.create({
     component: CadastrarAtividadeModal,
   }).onOk(() => {
-    pesquisarAtividades();
+    void pesquisarAtividades();
   });
 };
 

@@ -21,37 +21,41 @@ const atuacaoApi = new AtuacaoApi(undefined, Constants.apiRoot);
 export const ProjetoService = criarServico({
   // Projeto
   listar: () => projetoApi.projetoControllerListar(),
-  encontrar: (id: string) => projetoApi.projetoControllerEncontrar(id),
+  encontrar: (params: { id: string }) => projetoApi.projetoControllerEncontrar(params.id),
   cadastrar: (dto: AdicionarProjetoDto) => projetoApi.projetoControllerAdicionar(dto),
-  atualizar: (id: string, dto: AtualizarProjetoDto) =>
-    projetoApi.projetoControllerAtualizar(id, dto),
-  deletar: (id: string) => projetoApi.projetoControllerDeletar(id),
-  abrir: (id: string) => projetoApi.projetoControllerAbrir(id),
-  fechar: (id: string) => projetoApi.projetoControllerFechar(id),
-  calcularHoras: (id: string) => projetoApi.projetoControllerCalcularHoras(id),
-  listarAtividades: (id: string) => projetoApi.projetoControllerListarAtividades(id),
+  atualizar: (params: { id: string; dto: AtualizarProjetoDto }) =>
+    projetoApi.projetoControllerAtualizar(params.id, params.dto),
+  deletar: (params: { id: string }) => projetoApi.projetoControllerDeletar(params.id),
+  abrir: (params: { id: string }) => projetoApi.projetoControllerAbrir(params.id),
+  fechar: (params: { id: string }) => projetoApi.projetoControllerFechar(params.id),
+  calcularHoras: (params: { id: string }) =>
+
+    projetoApi.projetoControllerCalcularHoras(params.id),
+  listarAtividades: (params: { id: string }) =>
+    projetoApi.projetoControllerListarAtividades(params.id),
 
   // Atividade
-  listarAtividadesGeral: ({ mes, ano }: { mes: number; ano: number }) =>
-    atividadeApi.atividadeControllerListarAtividadesGeral(mes, ano),
-  encontrarAtividade: (id: string) =>
-    atividadeApi.atividadeControllerEncontrarAtividade(id),
+  listarAtividadesGeral: (params: { mes: number; ano: number }) =>
+    atividadeApi.atividadeControllerListarAtividadesGeral(params.mes, params.ano),
+  encontrarAtividade: (params: { id: string }) =>
+    atividadeApi.atividadeControllerEncontrarAtividade(params.id),
   cadastrarAtividade: (dto: AdicionarAtividadeDto) =>
     atividadeApi.atividadeControllerAdicionarAtividade(dto),
-  atualizarAtividade: (id: string, dto: AtualizarAtividadeDto) =>
-    atividadeApi.atividadeControllerAtualizarAtividade(id, dto),
-  deletarAtividade: (id: string) =>
-    atividadeApi.atividadeControllerDeletarAtividade(id),
+  atualizarAtividade: (params: { id: string; dto: AtualizarAtividadeDto }) =>
+    atividadeApi.atividadeControllerAtualizarAtividade(params.id, params.dto),
+  deletarAtividade: (params: { id: string }) =>
+    atividadeApi.atividadeControllerDeletarAtividade(params.id),
 
   // Atuacao
   iniciarAtuacao: (dto: AtuacaoDto) => atuacaoApi.atuacaoControllerIniciar(dto),
-  finalizarAtuacao: (id: string, dto: AtuacaoDto) =>
-    atuacaoApi.atuacaoControllerFinalizar(id, dto),
-  atualizarAtuacao: (id: string, dto: AtualizarAtuacaoDto) =>
-    atuacaoApi.atuacaoControllerAtualizar(id, dto),
-  deletarAtuacao: (id: string) => atuacaoApi.atuacaoControllerDeletar(id),
+  finalizarAtuacao: (params: { id: string; dto: AtuacaoDto }) =>
+    atuacaoApi.atuacaoControllerFinalizar(params.id, params.dto),
+  atualizarAtuacao: (params: { id: string; dto: AtualizarAtuacaoDto }) =>
+    atuacaoApi.atuacaoControllerAtualizar(params.id, params.dto),
+  deletarAtuacao: (params: { id: string }) =>
+    atuacaoApi.atuacaoControllerDeletar(params.id),
 
   // Relatório
-  relatorio: ({ mes, ano }: { mes: number; ano: number }) =>
-    atuacaoApi.atuacaoControllerRelatorio(mes, ano),
+  relatorio: (params: { mes: number; ano: number }) =>
+    atuacaoApi.atuacaoControllerRelatorio(params.mes, params.ano),
 });
