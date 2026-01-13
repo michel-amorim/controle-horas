@@ -83,7 +83,6 @@
               <q-btn
                 icon="edit"
                 color="warning"
-                flat
                 dense
                 unelevated
                 @click="editarAtividade(row as unknown as Atividade)"
@@ -91,7 +90,6 @@
               <q-btn
                 :icon="(row as unknown as Atividade).ativo ? 'visibility_off' : 'visibility'"
                 color="primary"
-                flat
                 dense
                 unelevated
                 @click="alterarStatusAtividade(row as unknown as Atividade)"
