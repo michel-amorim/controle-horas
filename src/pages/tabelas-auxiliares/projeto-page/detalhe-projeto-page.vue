@@ -1,32 +1,8 @@
 <template>
   <ContainerComponent :visivel="true" :titulo="titulo">
     <div class="projeto-detalhes">
-      <!-- Header com ações -->
-      <div class="detalhes-header">
-        <div class="detalhes-acoes">
-          <BotaoComponent
-            :label="modoEdicao ? 'Cancelar' : 'Editar'"
-            :icone-esquerda="modoEdicao ? 'close' : 'edit'"
-            @click="toggleModoEdicao"
-          />
-          <BotaoComponent
-            v-if="modoEdicao"
-            label="Salvar"
-            icone-esquerda="done"
-            color="positive"
-            @click="salvarProjeto"
-          />
-          <BotaoComponent
-            v-else
-            :label="projeto?.concluido ? 'Reabrir Projeto' : 'Fechar Projeto'"
-            :icone-esquerda="projeto?.concluido ? 'toggle_on' : 'toggle_off'"
-            @click="alterarStatusProjeto"
-          />
-        </div>
-      </div>
-
       <!-- Informações do Projeto -->
-      <CardComponent titulo="Informações do Projeto">
+      <CardComponent titulo="Informações do Projeto" :acoes="acoesCard">
         <div class="projeto-info-grid">
           <EditableFieldComponent
             :model-value="formulario.nome || ''"
@@ -89,7 +65,7 @@
       </CardComponent>
 
       <!-- Lista de Atividades -->
-      <CardComponent titulo="Atividades" class="q-mt-md">
+      <CardComponent titulo="Atividades" class="q-mt-xl">
         <template #acoes>
           <BotaoComponent
             label="Nova Atividade"
@@ -109,21 +85,23 @@
             <BadgeBooleanComponent :valor="Boolean(cell)" />
           </template>
           <template #acao="{ row }">
-            <div class="acoes-atividade">
-              <BotaoComponent
-                icone-esquerda="edit"
+            <q-btn-group flat dense>
+              <q-btn
+                icon="edit"
                 flat
                 dense
+                unelevated
                 @click="editarAtividade(row as unknown as Atividade)"
               />
-              <BotaoComponent
-                :icone-esquerda="(row as unknown as Atividade).ativo ? 'visibility_off' : 'visibility'"
+              <q-btn
+                :icon="(row as unknown as Atividade).ativo ? 'visibility_off' : 'visibility'"
                 flat
                 dense
+                unelevated
                 :color="(row as unknown as Atividade).ativo ? 'warning' : 'positive'"
                 @click="alterarStatusAtividade(row as unknown as Atividade)"
               />
-            </div>
+            </q-btn-group>
           </template>
         </TabelaComponent>
       </CardComponent>
@@ -147,6 +125,7 @@ import type { Projeto, Atividade, AtualizarProjetoDto } from 'src/api-client';
 import { StatusHttpSucesso } from 'src/constants/status-http-sucesso';
 import { Notify, Dialog } from 'quasar';
 import { AtividadesColunas } from './detalhe-projeto-colunas';
+import type { PropsBotao } from 'src/components/global/botao-component/padrao/botao-interface';
 
 interface HorasInfo {
   projetoId: string;
@@ -187,6 +166,45 @@ const corProgresso = computed(() => {
   if (percentual >= 90) return 'negative';
   if (percentual >= 75) return 'warning';
   return 'positive';
+});
+
+const acoesCard = computed<PropsBotao[]>(() => {
+  const acoes: PropsBotao[] = [];
+
+  if (modoEdicao.value) {
+    acoes.push({
+      id: 'salvar',
+      label: 'Salvar',
+      iconeEsquerda: 'done',
+      color: 'positive',
+      onClick: () => {
+        void salvarProjeto();
+      },
+    });
+    acoes.push({
+      id: 'cancelar',
+      label: 'Cancelar',
+      iconeEsquerda: 'close',
+      onClick: toggleModoEdicao,
+    });
+  } else {
+    acoes.push({
+      id: 'fechar',
+      label: projeto.value?.concluido ? 'Reabrir Projeto' : 'Fechar Projeto',
+      iconeEsquerda: projeto.value?.concluido ? 'toggle_on' : 'toggle_off',
+      onClick: () => {
+        void alterarStatusProjeto();
+      },
+    });
+    acoes.push({
+      id: 'editar',
+      label: 'Editar',
+      iconeEsquerda: 'edit',
+      onClick: toggleModoEdicao,
+    });
+  }
+
+  return acoes;
 });
 
 const carregarProjeto = async () => {
@@ -368,25 +386,19 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .projeto-detalhes {
-  .detalhes-header {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-    display: flex;
-    justify-content: flex-end;
-
-    .detalhes-acoes {
-      display: flex;
-      gap: 0.5rem;
-    }
-  }
-
   .projeto-info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-bottom: 1rem;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .field-display {
@@ -432,11 +444,6 @@ onMounted(() => {
         margin-left: 0.5rem;
       }
     }
-  }
-
-  .acoes-atividade {
-    display: flex;
-    gap: 0.25rem;
   }
 }
 </style>

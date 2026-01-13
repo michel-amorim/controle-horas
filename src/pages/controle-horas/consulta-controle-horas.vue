@@ -11,7 +11,7 @@
         <InputComponent input-class="col" label="Ano" v-model="formulario.ano" />
       </div>
       <template #optionalBtn>
-        <BotaoComponent icone-esquerda="add" label="atividade" @click="cadastrarHoras" />
+        <BotaoComponent icone-esquerda="add" label="Atividades do Mês" @click="cadastrarHoras" />
       </template>
     </FormComponent>
     <TabelaComponent :rows="dadosTabela" :columns="ControleHorasColunas" />

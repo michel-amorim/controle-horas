@@ -2,6 +2,24 @@
   padding: $spacing-lg;
   border-radius: $spacing-sm;
 
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      flex: 1;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: $spacing-sm;
+      align-items: center;
+    }
+  }
+
   .header-centralizado {
     text-align: center;
   }
