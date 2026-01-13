@@ -36,6 +36,7 @@ export const MaterialIconsEnum = {
   ToggleOff: 'toggle_off',
   Visibility: 'visibility',
   VisibilityOff: 'visibility_off',
+  EditOff: 'edit_off',
 } as const;
 
 export type MaterialIconKeys = keyof typeof MaterialIconsEnum;

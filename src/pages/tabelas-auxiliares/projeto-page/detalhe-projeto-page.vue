@@ -1,6 +1,14 @@
 <template>
   <ContainerComponent :visivel="true" :titulo="titulo">
     <div class="projeto-detalhes">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <q-breadcrumbs>
+          <q-breadcrumbs-el label="Projetos" to="/lista-projetos" />
+          <q-breadcrumbs-el :label="projeto?.nome || 'Detalhes'" />
+        </q-breadcrumbs>
+      </div>
+
       <!-- Informações do Projeto -->
       <CardComponent titulo="Informações do Projeto" :acoes="acoesCard">
         <div class="projeto-info-grid">
@@ -66,7 +74,33 @@
 
       <!-- Lista de Atividades -->
       <CardComponent titulo="Atividades" class="q-mt-xl">
-        <template #acoes>
+        <TabelaComponent :rows="atividadesFiltradas" :columns="AtividadesColunas">
+          <template #ativo="{ cell }">
+            <BadgeBooleanComponent :valor="Boolean(cell)" />
+          </template>
+          <template #acao="{ row }">
+            <q-btn-group flat dense>
+              <q-btn
+                icon="edit"
+                color="warning"
+                flat
+                dense
+                unelevated
+                @click="editarAtividade(row as unknown as Atividade)"
+              />
+              <q-btn
+                :icon="(row as unknown as Atividade).ativo ? 'visibility_off' : 'visibility'"
+                color="primary"
+                flat
+                dense
+                unelevated
+                @click="alterarStatusAtividade(row as unknown as Atividade)"
+              />
+            </q-btn-group>
+          </template>
+        </TabelaComponent>
+
+        <div class="secao-acoes q-mt-lg">
           <BotaoComponent
             label="Nova Atividade"
             icone-esquerda="add"
@@ -78,32 +112,7 @@
             flat
             @click="toggleMostrarInativos"
           />
-        </template>
-
-        <TabelaComponent :rows="atividadesFiltradas" :columns="AtividadesColunas">
-          <template #ativo="{ cell }">
-            <BadgeBooleanComponent :valor="Boolean(cell)" />
-          </template>
-          <template #acao="{ row }">
-            <q-btn-group flat dense>
-              <q-btn
-                icon="edit"
-                flat
-                dense
-                unelevated
-                @click="editarAtividade(row as unknown as Atividade)"
-              />
-              <q-btn
-                :icon="(row as unknown as Atividade).ativo ? 'visibility_off' : 'visibility'"
-                flat
-                dense
-                unelevated
-                :color="(row as unknown as Atividade).ativo ? 'warning' : 'positive'"
-                @click="alterarStatusAtividade(row as unknown as Atividade)"
-              />
-            </q-btn-group>
-          </template>
-        </TabelaComponent>
+        </div>
       </CardComponent>
     </div>
   </ContainerComponent>
@@ -171,6 +180,25 @@ const corProgresso = computed(() => {
 const acoesCard = computed<PropsBotao[]>(() => {
   const acoes: PropsBotao[] = [];
 
+  if (!modoEdicao.value) {
+    acoes.push({
+      id: 'fechar',
+      label: projeto.value?.concluido ? 'Reabrir Projeto' : 'Fechar Projeto',
+      iconeEsquerda: projeto.value?.concluido ? 'toggle_on' : 'toggle_off',
+      onClick: () => {
+        void alterarStatusProjeto();
+      },
+    });
+  }
+
+  acoes.push({
+    id: 'editar',
+    label: modoEdicao.value ? 'Em Edição' : 'Editar',
+    iconeEsquerda: modoEdicao.value ? 'edit_off' : 'edit',
+    onClick: modoEdicao.value ? undefined : toggleModoEdicao,
+    disable: modoEdicao.value,
+  });
+
   if (modoEdicao.value) {
     acoes.push({
       id: 'salvar',
@@ -185,21 +213,6 @@ const acoesCard = computed<PropsBotao[]>(() => {
       id: 'cancelar',
       label: 'Cancelar',
       iconeEsquerda: 'close',
-      onClick: toggleModoEdicao,
-    });
-  } else {
-    acoes.push({
-      id: 'fechar',
-      label: projeto.value?.concluido ? 'Reabrir Projeto' : 'Fechar Projeto',
-      iconeEsquerda: projeto.value?.concluido ? 'toggle_on' : 'toggle_off',
-      onClick: () => {
-        void alterarStatusProjeto();
-      },
-    });
-    acoes.push({
-      id: 'editar',
-      label: 'Editar',
-      iconeEsquerda: 'edit',
       onClick: toggleModoEdicao,
     });
   }
@@ -386,6 +399,16 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .projeto-detalhes {
+  .breadcrumb {
+    margin-bottom: 1.5rem;
+  }
+
+  .secao-acoes {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+
   .projeto-info-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
