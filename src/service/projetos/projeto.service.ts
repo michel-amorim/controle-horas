@@ -1,9 +1,10 @@
 import type { AdicionarProjetoDto } from 'src/api-client';
-import { ProjetoApi } from 'src/api-client';
+import { ProjetoApi, AtuacaoApi } from 'src/api-client';
 import { Constants } from 'src/constants/constants';
 import { criarServico } from 'src/hooks/criar-servico';
 
 const api = new ProjetoApi(undefined, Constants.apiRoot);
+const atuacaoApi = new AtuacaoApi(undefined, Constants.apiRoot);
 
 export const ProjetoService = criarServico({
   cadastrar: (dto: AdicionarProjetoDto) => api.projetoControllerAdicionar(dto),
@@ -11,4 +12,5 @@ export const ProjetoService = criarServico({
   alterarProjetoFechar: (id: string) => api.projetoControllerFechar(id),
   listarProjetosPorID: (id: string) => api.projetoControllerListarAtividades(id),
   listarProjetos: () => api.projetoControllerListar(),
+  relatorio: (mes: number, ano: number) => (atuacaoApi as any).atuacaoControllerRelatorio({ mes, ano }),
 });
