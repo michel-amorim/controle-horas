@@ -12,14 +12,14 @@
           <BotaoComponent
             v-if="modoEdicao"
             label="Salvar"
-            icone-esquerda="save"
+            icone-esquerda="done"
             color="positive"
             @click="salvarProjeto"
           />
           <BotaoComponent
             v-else
             :label="projeto?.concluido ? 'Reabrir Projeto' : 'Fechar Projeto'"
-            :icone-esquerda="projeto?.concluido ? 'lock_open' : 'lock'"
+            :icone-esquerda="projeto?.concluido ? 'toggle_on' : 'toggle_off'"
             @click="alterarStatusProjeto"
           />
         </div>
@@ -47,10 +47,11 @@
             type="color"
           />
           <EditableFieldComponent
-            v-model="formulario.horasMaxima"
+            :model-value="String(formulario.horasMaxima || '')"
             label="Horas Máximas"
             :editing="modoEdicao"
             type="number"
+            @update:model-value="formulario.horasMaxima = Number($event) || 0"
           />
 
           <!-- Status do Projeto -->
@@ -110,14 +111,14 @@
                 icone-esquerda="edit"
                 flat
                 dense
-                @click="editarAtividade(row)"
+                @click="editarAtividade(row as Atividade)"
               />
               <BotaoComponent
-                :icone-esquerda="row.ativo ? 'visibility_off' : 'visibility'"
+                :icone-esquerda="(row as Atividade).ativo ? 'visibility_off' : 'visibility'"
                 flat
                 dense
-                :color="row.ativo ? 'warning' : 'positive'"
-                @click="alterarStatusAtividade(row)"
+                :color="(row as Atividade).ativo ? 'warning' : 'positive'"
+                @click="alterarStatusAtividade(row as Atividade)"
               />
             </div>
           </template>

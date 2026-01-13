@@ -5,7 +5,7 @@
       <div v-if="!editing" class="field-display">
         <slot name="display" :value="modelValue">
           <span v-if="type === 'color'" class="color-display">
-            <span class="color-sample" :style="{ backgroundColor: modelValue }"></span>
+            <span class="color-sample" :style="{ backgroundColor: String(modelValue) }"></span>
             {{ modelValue }}
           </span>
           <span v-else>{{ modelValue || '-' }}</span>
