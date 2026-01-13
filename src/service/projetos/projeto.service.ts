@@ -5,6 +5,7 @@ import type {
   AtualizarAtividadeDto,
   AtuacaoDto,
   AtualizarAtuacaoDto,
+  AtividadeControllerAlterarStatusRequest,
 } from 'src/api-client';
 import {
   ProjetoApi,
@@ -13,6 +14,13 @@ import {
 } from 'src/api-client';
 import { Constants } from 'src/constants/constants';
 import { criarServico } from 'src/hooks/criar-servico';
+
+interface ListarAtividadesOptions {
+  mensagem?: boolean;
+  params?: {
+    mostrarInativos?: boolean;
+  };
+}
 
 const projetoApi = new ProjetoApi(undefined, Constants.apiRoot);
 const atividadeApi = new AtividadeApi(undefined, Constants.apiRoot);
@@ -29,10 +37,9 @@ export const ProjetoService = criarServico({
   abrir: (params: { id: string }) => projetoApi.projetoControllerAbrir(params.id),
   fechar: (params: { id: string }) => projetoApi.projetoControllerFechar(params.id),
   calcularHoras: (params: { id: string }) =>
-
     projetoApi.projetoControllerCalcularHoras(params.id),
-  listarAtividades: (params: { id: string }) =>
-    projetoApi.projetoControllerListarAtividades(params.id),
+  listarAtividades: (params: { id: string }, options?: ListarAtividadesOptions) =>
+    projetoApi.projetoControllerListarAtividades(params.id, options?.params?.mostrarInativos),
 
   // Atividade
   listarAtividadesGeral: (params: { mes: number; ano: number }) =>
@@ -45,6 +52,8 @@ export const ProjetoService = criarServico({
     atividadeApi.atividadeControllerAtualizarAtividade(params.id, params.dto),
   deletarAtividade: (params: { id: string }) =>
     atividadeApi.atividadeControllerDeletarAtividade(params.id),
+  alterarStatusAtividade: (params: { id: string; dto: AtividadeControllerAlterarStatusRequest }) =>
+    atividadeApi.atividadeControllerAlterarStatus(params.id, params.dto),
 
   // Atuacao
   iniciarAtuacao: (dto: AtuacaoDto) => atuacaoApi.atuacaoControllerIniciar(dto),
