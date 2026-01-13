@@ -31,6 +31,11 @@ export const MaterialIconsEnum = {
   UploadFile: 'upload_file',
   Delete: 'delete',
   Add: 'add',
+  Done: 'done',
+  ToggleOn: 'toggle_on',
+  ToggleOff: 'toggle_off',
+  Visibility: 'visibility',
+  VisibilityOff: 'visibility_off',
 } as const;
 
 export type MaterialIconKeys = keyof typeof MaterialIconsEnum;

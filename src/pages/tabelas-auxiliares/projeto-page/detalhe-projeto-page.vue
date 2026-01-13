@@ -29,22 +29,25 @@
       <CardComponent titulo="Informações do Projeto">
         <div class="projeto-info-grid">
           <EditableFieldComponent
-            v-model="formulario.nome"
+            :model-value="formulario.nome || ''"
             label="Nome"
             :editing="modoEdicao"
             type="text"
+            @update:model-value="formulario.nome = String($event)"
           />
           <EditableFieldComponent
-            v-model="formulario.origem"
+            :model-value="formulario.origem || ''"
             label="Origem"
             :editing="modoEdicao"
             type="text"
+            @update:model-value="formulario.origem = String($event)"
           />
           <EditableFieldComponent
-            v-model="formulario.cor"
+            :model-value="formulario.cor || ''"
             label="Cor"
             :editing="modoEdicao"
             type="color"
+            @update:model-value="formulario.cor = String($event)"
           />
           <EditableFieldComponent
             :model-value="String(formulario.horasMaxima || '')"
@@ -103,7 +106,7 @@
 
         <TabelaComponent :rows="atividadesFiltradas" :columns="AtividadesColunas">
           <template #ativo="{ cell }">
-            <BadgeBooleanComponent :valor="cell" />
+            <BadgeBooleanComponent :valor="Boolean(cell)" />
           </template>
           <template #acao="{ row }">
             <div class="acoes-atividade">
@@ -111,14 +114,14 @@
                 icone-esquerda="edit"
                 flat
                 dense
-                @click="editarAtividade(row as Atividade)"
+                @click="editarAtividade(row as unknown as Atividade)"
               />
               <BotaoComponent
-                :icone-esquerda="(row as Atividade).ativo ? 'visibility_off' : 'visibility'"
+                :icone-esquerda="(row as unknown as Atividade).ativo ? 'visibility_off' : 'visibility'"
                 flat
                 dense
-                :color="(row as Atividade).ativo ? 'warning' : 'positive'"
-                @click="alterarStatusAtividade(row as Atividade)"
+                :color="(row as unknown as Atividade).ativo ? 'warning' : 'positive'"
+                @click="alterarStatusAtividade(row as unknown as Atividade)"
               />
             </div>
           </template>
@@ -216,7 +219,7 @@ const carregarHoras = async () => {
     });
 
     if (status === StatusHttpSucesso.OK) {
-      horasInfo.value = data;
+      horasInfo.value = data as unknown as HorasInfo;
     }
   } catch {
     // Erro ao carregar horas - será exibido em outro local ou log
@@ -226,11 +229,8 @@ const carregarHoras = async () => {
 const carregarAtividades = async () => {
   try {
     const { data, status } = await ProjetoService.listarAtividades(
-      { id: projetoId },
-      {
-        mensagem: false,
-        params: { mostrarInativos: mostrarInativos.value },
-      }
+      { id: projetoId, mostrarInativos: mostrarInativos.value },
+      { mensagem: false }
     );
 
     if (status === StatusHttpSucesso.OK) {

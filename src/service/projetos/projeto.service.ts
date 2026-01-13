@@ -15,12 +15,6 @@ import {
 import { Constants } from 'src/constants/constants';
 import { criarServico } from 'src/hooks/criar-servico';
 
-interface ListarAtividadesOptions {
-  mensagem?: boolean;
-  params?: {
-    mostrarInativos?: boolean;
-  };
-}
 
 const projetoApi = new ProjetoApi(undefined, Constants.apiRoot);
 const atividadeApi = new AtividadeApi(undefined, Constants.apiRoot);
@@ -38,10 +32,10 @@ export const ProjetoService = criarServico({
   fechar: (params: { id: string }) => projetoApi.projetoControllerFechar(params.id),
   calcularHoras: (params: { id: string }) =>
     projetoApi.projetoControllerCalcularHoras(params.id),
-  listarAtividades: (params: { id: string }, options?: ListarAtividadesOptions) =>
+  listarAtividades: (params: { id: string; mostrarInativos?: boolean }) =>
     projetoApi.projetoControllerListarAtividades(
       params.id,
-      options?.params?.mostrarInativos === true ? 'true' : undefined,
+      params.mostrarInativos === true ? 'true' : 'false',
     ),
 
   // Atividade
