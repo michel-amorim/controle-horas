@@ -39,7 +39,10 @@ export const ProjetoService = criarServico({
   calcularHoras: (params: { id: string }) =>
     projetoApi.projetoControllerCalcularHoras(params.id),
   listarAtividades: (params: { id: string }, options?: ListarAtividadesOptions) =>
-    projetoApi.projetoControllerListarAtividades(params.id, options?.params?.mostrarInativos),
+    projetoApi.projetoControllerListarAtividades(
+      params.id,
+      options?.params?.mostrarInativos === true ? 'true' : undefined,
+    ),
 
   // Atividade
   listarAtividadesGeral: (params: { mes: number; ano: number }) =>
