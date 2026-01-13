@@ -4,6 +4,7 @@ export enum Routename {
   // Cadastro auxiliar
   Empresa = 'empresa',
   ListaProjeto = 'lista-projeto',
+  DetalheProjeto = 'detalhe-projeto',
   CadastrarProjetos = 'cadastar-projetos',
   // Controle de horas
   ConsultaHoras = 'consultar-horas',

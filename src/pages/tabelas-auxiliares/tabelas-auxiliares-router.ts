@@ -14,4 +14,12 @@ export const TabelasAuxiliaresRouter: PageConfig[] = [
       icon: 'app_registration',
     },
   },
+  {
+    layout: 'main',
+    component: () => import('pages/tabelas-auxiliares/projeto-page/detalhe-projeto-page.vue'),
+    route: {
+      path: '/projeto/:id',
+      name: Routename.DetalheProjeto,
+    },
+  },
 ];
