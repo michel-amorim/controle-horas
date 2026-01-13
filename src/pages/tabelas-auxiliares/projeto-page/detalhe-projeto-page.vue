@@ -1,14 +1,14 @@
 <template>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb q-mb-md">
+    <q-breadcrumbs>
+      <q-breadcrumbs-el label="Projetos" to="/lista-projetos" />
+      <q-breadcrumbs-el :label="projeto?.nome || 'Detalhes'" />
+    </q-breadcrumbs>
+  </div>
+
   <ContainerComponent :visivel="true" :titulo="titulo">
     <div class="projeto-detalhes">
-      <!-- Breadcrumb -->
-      <div class="breadcrumb">
-        <q-breadcrumbs>
-          <q-breadcrumbs-el label="Projetos" to="/lista-projetos" />
-          <q-breadcrumbs-el :label="projeto?.nome || 'Detalhes'" />
-        </q-breadcrumbs>
-      </div>
-
       <!-- Informações do Projeto -->
       <CardComponent titulo="Informações do Projeto" :acoes="acoesCard">
         <div class="projeto-info-grid">
@@ -73,7 +73,7 @@
       </CardComponent>
 
       <!-- Lista de Atividades -->
-      <CardComponent titulo="Atividades" class="q-mt-xl">
+      <CardComponent titulo="Atividades" :acoes="acoesAtividades" class="q-mt-xl">
         <TabelaComponent :rows="atividadesFiltradas" :columns="AtividadesColunas">
           <template #ativo="{ cell }">
             <BadgeBooleanComponent :valor="Boolean(cell)" />
@@ -99,20 +99,6 @@
             </q-btn-group>
           </template>
         </TabelaComponent>
-
-        <div class="secao-acoes q-mt-lg">
-          <BotaoComponent
-            label="Nova Atividade"
-            icone-esquerda="add"
-            @click="cadastrarAtividade"
-          />
-          <BotaoComponent
-            :label="mostrarInativos ? 'Ocultar Inativas' : 'Mostrar Inativas'"
-            :icone-esquerda="mostrarInativos ? 'visibility_off' : 'visibility'"
-            flat
-            @click="toggleMostrarInativos"
-          />
-        </div>
       </CardComponent>
     </div>
   </ContainerComponent>
@@ -124,7 +110,6 @@ import { useRoute } from 'vue-router';
 import ContainerComponent from 'src/components/global/container-component/container-component.vue';
 import CardComponent from 'src/components/global/card-component/card-component.vue';
 import TabelaComponent from 'src/components/global/tabela-component/tabela-component.vue';
-import BotaoComponent from 'src/components/global/botao-component/padrao/botao-component.vue';
 import BadgeBooleanComponent from 'src/components/badge-boolean/badge-boolean-component.vue';
 import EditableFieldComponent from 'src/components/global/editable-field/editable-field.vue';
 import CadastrarAtividadeModal from 'src/components/modals/cadastrar-atividade/cadastrar-atividade-modal.vue';
@@ -216,6 +201,27 @@ const acoesCard = computed<PropsBotao[]>(() => {
       onClick: toggleModoEdicao,
     });
   }
+
+  return acoes;
+});
+
+const acoesAtividades = computed<PropsBotao[]>(() => {
+  const acoes: PropsBotao[] = [];
+
+  acoes.push({
+    id: 'nova-atividade',
+    label: 'Nova Atividade',
+    iconeEsquerda: 'add',
+    onClick: cadastrarAtividade,
+  });
+
+  acoes.push({
+    id: 'mostrar-inativas',
+    label: mostrarInativos.value ? 'Ocultar Inativas' : 'Mostrar Inativas',
+    iconeEsquerda: mostrarInativos.value ? 'visibility_off' : 'visibility',
+    flat: true,
+    onClick: toggleMostrarInativos,
+  });
 
   return acoes;
 });
@@ -398,17 +404,11 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.breadcrumb {
+  margin-bottom: 1.5rem;
+}
+
 .projeto-detalhes {
-  .breadcrumb {
-    margin-bottom: 1.5rem;
-  }
-
-  .secao-acoes {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: flex-end;
-  }
-
   .projeto-info-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
