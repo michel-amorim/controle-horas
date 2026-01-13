@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **nome** | **string** |  | [default to undefined]
 **descricao** | **string** |  | [default to undefined]
 **projetoId** | **string** |  | [default to undefined]
+**ativo** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -18,6 +19,7 @@ const instance: AdicionarAtividadeDto = {
     nome,
     descricao,
     projetoId,
+    ativo,
 };
 ```
 

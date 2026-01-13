@@ -8,6 +8,7 @@ docs/AdicionarAtividadeDto.md
 docs/AdicionarProjetoDto.md
 docs/Atividade.md
 docs/AtividadeApi.md
+docs/AtividadeControllerAlterarStatusRequest.md
 docs/Atuacao.md
 docs/AtuacaoApi.md
 docs/AtuacaoDto.md

@@ -47,6 +47,12 @@ export interface AdicionarAtividadeDto {
      * @memberof AdicionarAtividadeDto
      */
     'projetoId': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AdicionarAtividadeDto
+     */
+    'ativo'?: boolean;
 }
 /**
  * 
@@ -117,6 +123,12 @@ export interface Atividade {
     'atuacoes': Array<Atuacao>;
     /**
      * 
+     * @type {boolean}
+     * @memberof Atividade
+     */
+    'ativo': boolean;
+    /**
+     * 
      * @type {string}
      * @memberof Atividade
      */
@@ -127,6 +139,19 @@ export interface Atividade {
      * @memberof Atividade
      */
     'stampUpdate': string;
+}
+/**
+ * 
+ * @export
+ * @interface AtividadeControllerAlterarStatusRequest
+ */
+export interface AtividadeControllerAlterarStatusRequest {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AtividadeControllerAlterarStatusRequest
+     */
+    'ativo': boolean;
 }
 /**
  * 
@@ -256,6 +281,12 @@ export interface AtualizarAtividadeDto {
      * @memberof AtualizarAtividadeDto
      */
     'projetoId'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AtualizarAtividadeDto
+     */
+    'ativo'?: boolean;
 }
 /**
  * 
@@ -481,6 +512,46 @@ export const AtividadeApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @summary Ativa ou desativa uma atividade.
+         * @param {string} id 
+         * @param {AtividadeControllerAlterarStatusRequest} atividadeControllerAlterarStatusRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atividadeControllerAlterarStatus: async (id: string, atividadeControllerAlterarStatusRequest: AtividadeControllerAlterarStatusRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('atividadeControllerAlterarStatus', 'id', id)
+            // verify required parameter 'atividadeControllerAlterarStatusRequest' is not null or undefined
+            assertParamExists('atividadeControllerAlterarStatus', 'atividadeControllerAlterarStatusRequest', atividadeControllerAlterarStatusRequest)
+            const localVarPath = `/atividade/{id}/status`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(atividadeControllerAlterarStatusRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Atualiza uma atividade.
          * @param {string} id 
          * @param {AtualizarAtividadeDto} atualizarAtividadeDto 
@@ -656,6 +727,20 @@ export const AtividadeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Ativa ou desativa uma atividade.
+         * @param {string} id 
+         * @param {AtividadeControllerAlterarStatusRequest} atividadeControllerAlterarStatusRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async atividadeControllerAlterarStatus(id: string, atividadeControllerAlterarStatusRequest: AtividadeControllerAlterarStatusRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Atividade>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.atividadeControllerAlterarStatus(id, atividadeControllerAlterarStatusRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AtividadeApi.atividadeControllerAlterarStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Atualiza uma atividade.
          * @param {string} id 
          * @param {AtualizarAtividadeDto} atualizarAtividadeDto 
@@ -730,6 +815,17 @@ export const AtividadeApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @summary Ativa ou desativa uma atividade.
+         * @param {string} id 
+         * @param {AtividadeControllerAlterarStatusRequest} atividadeControllerAlterarStatusRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        atividadeControllerAlterarStatus(id: string, atividadeControllerAlterarStatusRequest: AtividadeControllerAlterarStatusRequest, options?: RawAxiosRequestConfig): AxiosPromise<Atividade> {
+            return localVarFp.atividadeControllerAlterarStatus(id, atividadeControllerAlterarStatusRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Atualiza uma atividade.
          * @param {string} id 
          * @param {AtualizarAtividadeDto} atualizarAtividadeDto 
@@ -790,6 +886,19 @@ export class AtividadeApi extends BaseAPI {
      */
     public atividadeControllerAdicionarAtividade(adicionarAtividadeDto: AdicionarAtividadeDto, options?: RawAxiosRequestConfig) {
         return AtividadeApiFp(this.configuration).atividadeControllerAdicionarAtividade(adicionarAtividadeDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Ativa ou desativa uma atividade.
+     * @param {string} id 
+     * @param {AtividadeControllerAlterarStatusRequest} atividadeControllerAlterarStatusRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AtividadeApi
+     */
+    public atividadeControllerAlterarStatus(id: string, atividadeControllerAlterarStatusRequest: AtividadeControllerAlterarStatusRequest, options?: RawAxiosRequestConfig) {
+        return AtividadeApiFp(this.configuration).atividadeControllerAlterarStatus(id, atividadeControllerAlterarStatusRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1548,12 +1657,15 @@ export const ProjetoApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary Lista atividades de um projeto.
          * @param {string} id 
+         * @param {string} mostrarInativos 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projetoControllerListarAtividades: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projetoControllerListarAtividades: async (id: string, mostrarInativos: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projetoControllerListarAtividades', 'id', id)
+            // verify required parameter 'mostrarInativos' is not null or undefined
+            assertParamExists('projetoControllerListarAtividades', 'mostrarInativos', mostrarInativos)
             const localVarPath = `/projeto/{id}/atividades`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1566,6 +1678,10 @@ export const ProjetoApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (mostrarInativos !== undefined) {
+                localVarQueryParameter['mostrarInativos'] = mostrarInativos;
+            }
 
 
     
@@ -1696,11 +1812,12 @@ export const ProjetoApiFp = function(configuration?: Configuration) {
          * 
          * @summary Lista atividades de um projeto.
          * @param {string} id 
+         * @param {string} mostrarInativos 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projetoControllerListarAtividades(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Atividade>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projetoControllerListarAtividades(id, options);
+        async projetoControllerListarAtividades(id: string, mostrarInativos: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Atividade>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projetoControllerListarAtividades(id, mostrarInativos, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjetoApi.projetoControllerListarAtividades']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1799,11 +1916,12 @@ export const ProjetoApiFactory = function (configuration?: Configuration, basePa
          * 
          * @summary Lista atividades de um projeto.
          * @param {string} id 
+         * @param {string} mostrarInativos 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projetoControllerListarAtividades(id: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Atividade>> {
-            return localVarFp.projetoControllerListarAtividades(id, options).then((request) => request(axios, basePath));
+        projetoControllerListarAtividades(id: string, mostrarInativos: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Atividade>> {
+            return localVarFp.projetoControllerListarAtividades(id, mostrarInativos, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1915,12 +2033,13 @@ export class ProjetoApi extends BaseAPI {
      * 
      * @summary Lista atividades de um projeto.
      * @param {string} id 
+     * @param {string} mostrarInativos 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjetoApi
      */
-    public projetoControllerListarAtividades(id: string, options?: RawAxiosRequestConfig) {
-        return ProjetoApiFp(this.configuration).projetoControllerListarAtividades(id, options).then((request) => request(this.axios, this.basePath));
+    public projetoControllerListarAtividades(id: string, mostrarInativos: string, options?: RawAxiosRequestConfig) {
+        return ProjetoApiFp(this.configuration).projetoControllerListarAtividades(id, mostrarInativos, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

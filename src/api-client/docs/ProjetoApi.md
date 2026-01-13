@@ -428,9 +428,11 @@ const configuration = new Configuration();
 const apiInstance = new ProjetoApi(configuration);
 
 let id: string; // (default to undefined)
+let mostrarInativos: string; // (default to undefined)
 
 const { status, data } = await apiInstance.projetoControllerListarAtividades(
-    id
+    id,
+    mostrarInativos
 );
 ```
 
@@ -439,6 +441,7 @@ const { status, data } = await apiInstance.projetoControllerListarAtividades(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **id** | [**string**] |  | defaults to undefined|
+| **mostrarInativos** | [**string**] |  | defaults to undefined|
 
 
 ### Return type

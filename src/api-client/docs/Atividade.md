@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **descricao** | **string** |  | [optional] [default to undefined]
 **projeto** | [**Projeto**](Projeto.md) |  | [default to undefined]
 **atuacoes** | [**Array&lt;Atuacao&gt;**](Atuacao.md) |  | [default to undefined]
+**ativo** | **boolean** |  | [default to undefined]
 **stampCreate** | **string** |  | [default to undefined]
 **stampUpdate** | **string** |  | [default to undefined]
 
@@ -24,6 +25,7 @@ const instance: Atividade = {
     descricao,
     projeto,
     atuacoes,
+    ativo,
     stampCreate,
     stampUpdate,
 };

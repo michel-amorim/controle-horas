@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**atividadeControllerAdicionarAtividade**](#atividadecontrolleradicionaratividade) | **POST** /atividade | Cadastra uma atividade.|
+|[**atividadeControllerAlterarStatus**](#atividadecontrolleralterarstatus) | **PATCH** /atividade/{id}/status | Ativa ou desativa uma atividade.|
 |[**atividadeControllerAtualizarAtividade**](#atividadecontrolleratualizaratividade) | **PATCH** /atividade/{id} | Atualiza uma atividade.|
 |[**atividadeControllerDeletarAtividade**](#atividadecontrollerdeletaratividade) | **DELETE** /atividade/{id} | Deleta uma atividade.|
 |[**atividadeControllerEncontrarAtividade**](#atividadecontrollerencontraratividade) | **GET** /atividade/{id} | Obtem detalhes de uma atividade.|
@@ -58,6 +59,60 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **atividadeControllerAlterarStatus**
+> Atividade atividadeControllerAlterarStatus(atividadeControllerAlterarStatusRequest)
+
+
+### Example
+
+```typescript
+import {
+    AtividadeApi,
+    Configuration,
+    AtividadeControllerAlterarStatusRequest
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new AtividadeApi(configuration);
+
+let id: string; // (default to undefined)
+let atividadeControllerAlterarStatusRequest: AtividadeControllerAlterarStatusRequest; //
+
+const { status, data } = await apiInstance.atividadeControllerAlterarStatus(
+    id,
+    atividadeControllerAlterarStatusRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **atividadeControllerAlterarStatusRequest** | **AtividadeControllerAlterarStatusRequest**|  | |
+| **id** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**Atividade**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
